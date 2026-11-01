@@ -191,13 +191,19 @@
                     <h3 class="text-xl font-extrabold font-display text-slate-900 dark:text-white">Login Admin Utama</h3>
                 </div>
             </div>
-
+            <div id="demo-credential-box" class="hidden mb-5 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-slate-700 dark:text-slate-300">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="font-bold text-amber-700 dark:text-amber-400 flex items-center gap-1.5"><i data-lucide="key-round" class="w-3.5 h-3.5"></i> Kredensial Demo (Mode Preview)</span>
+                    <button type="button" onclick="window.fillDemoAdmin()" class="text-[11px] font-semibold underline text-blue-600 dark:text-blue-400 hover:opacity-80">Isi Otomatis</button>
+                </div>
+                <p class="text-[11px] opacity-90">Username: <code class="font-mono font-bold">admin</code> &bull; Password: <code class="font-mono font-bold">admin123</code></p>
+            </div>
             <form id="admin-login-form" onsubmit="window.handleAdminLogin(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5">Username / Email Admin</label>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5">Email / Username Admin</label>
                     <div class="relative">
                         <i data-lucide="user-check" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-                        <input id="login-username" type="text" required placeholder="admin" class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                        <input id="login-username" type="text" required placeholder="Masukkan Email atau Username Admin" class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
                     </div>
                 </div>
                 <div>
@@ -1116,8 +1122,15 @@
         }
 
         async function autoSetupDatabase() {
-            if (!supabase) {
-                updateConnectionBadge("Mode Offline", false);
+            const demoBox = document.getElementById('demo-credential-box');
+            if (demoBox) {
+                // Kotak kredensial dummy HANYA muncul jika IS_PREVIEW = true
+                demoBox.classList.toggle('hidden', !IS_PREVIEW);
+            }
+
+            // Jika Mode Preview aktif, gunakan data dummy di memori lokal saja
+            if (IS_PREVIEW || !supabase) {
+                updateConnectionBadge("Mode Preview (Data Dummy)", false);
                 renderAll();
                 return;
             }
@@ -1125,7 +1138,12 @@
             try {
                 updateConnectionBadge("Menyinkronkan Database...", false);
 
-                // 1. Cek & Sinkronisasi site_profile
+                // Bersihkan array dummy agar TIDAK masuk ke database saat IS_PREVIEW = false
+                appState.portfolios = [];
+                appState.certificates = [];
+                appState.otherProjects = [];
+
+                // 1. Ambil site_profile dari Supabase (Tanpa menyuntikkan koleksi dummy)
                 const { data: profData, error: profErr } = await supabase
                     .from('site_profile')
                     .select('*')
@@ -1138,86 +1156,46 @@
 
                 if (profData) {
                     appState.profile = { ...appState.profile, ...profData };
-                } else {
-                    const { error: insProfErr } = await supabase
-                        .from('site_profile')
-                        .upsert({ ...appState.profile, id: 1 }, { onConflict: 'id' });
-                    if (insProfErr) throw new Error(`Gagal inisialisasi site_profile: ${insProfErr.message}`);
                 }
 
-                // 2. Cek & Sinkronisasi nav_menus
+                // 2. Ambil nav_menus dari Supabase
                 const { data: menuData, error: menuErr } = await supabase
                     .from('nav_menus')
                     .select('*')
                     .order('sort_order', { ascending: true });
 
-                if (!menuErr && menuData && menuData.length > 0) {
+                if (!menuErr && Array.isArray(menuData) && menuData.length > 0) {
                     appState.menus = menuData;
-                } else if (!menuErr && menuData && menuData.length === 0) {
-                    const cleanMenus = appState.menus.map(m => ({
-                        id: String(m.id),
-                        label: m.label,
-                        target_url: m.target_url,
-                        sort_order: Number(m.sort_order) || 1
-                    }));
-                    await supabase.from('nav_menus').upsert(cleanMenus, { onConflict: 'id' });
                 }
 
-                // 3. Cek & Sinkronisasi portfolios
+                // 3. Ambil portfolios asli dari Supabase (Jika kosong di DB, tampilkan kosong, bukan dummy)
                 const { data: portData, error: portErr } = await supabase
                     .from('portfolios')
                     .select('*')
                     .order('created_at', { ascending: false });
 
-                if (!portErr && portData && portData.length > 0) {
+                if (!portErr && Array.isArray(portData)) {
                     appState.portfolios = portData;
-                } else if (!portErr && portData && portData.length === 0) {
-                    const cleanPorts = appState.portfolios.map(p => ({
-                        id: String(p.id),
-                        title: p.title,
-                        category: p.category,
-                        image_url: p.image_url,
-                        description: p.description || ''
-                    }));
-                    await supabase.from('portfolios').upsert(cleanPorts, { onConflict: 'id' });
                 }
 
-                // 4. Cek & Sinkronisasi certificates
+                // 4. Ambil certificates asli dari Supabase
                 const { data: certData, error: certErr } = await supabase
                     .from('certificates')
                     .select('*')
                     .order('created_at', { ascending: false });
 
-                if (!certErr && certData && certData.length > 0) {
+                if (!certErr && Array.isArray(certData)) {
                     appState.certificates = certData;
-                } else if (!certErr && certData && certData.length === 0) {
-                    const cleanCerts = appState.certificates.map(c => ({
-                        id: String(c.id),
-                        title: c.title,
-                        issuer: c.issuer,
-                        image_url: c.image_url
-                    }));
-                    await supabase.from('certificates').upsert(cleanCerts, { onConflict: 'id' });
                 }
 
-                // 5. Cek & Sinkronisasi other_projects
+                // 5. Ambil other_projects asli dari Supabase
                 const { data: projData, error: projErr } = await supabase
                     .from('other_projects')
                     .select('*')
                     .order('created_at', { ascending: false });
 
-                if (!projErr && projData && projData.length > 0) {
+                if (!projErr && Array.isArray(projData)) {
                     appState.otherProjects = projData;
-                } else if (!projErr && projData && projData.length === 0) {
-                    const cleanProjs = appState.otherProjects.map(pr => ({
-                        id: String(pr.id),
-                        title: pr.title,
-                        category: pr.category,
-                        thumbnail_url: pr.thumbnail_url,
-                        short_description: pr.short_description,
-                        project_link: pr.project_link || '#contact'
-                    }));
-                    await supabase.from('other_projects').upsert(cleanProjs, { onConflict: 'id' });
                 }
 
                 updateConnectionBadge("Terhubung ke Supabase ✅", true);
@@ -1652,21 +1630,53 @@
             else { const m = document.getElementById('login-modal'); m.classList.remove('hidden'); m.classList.add('flex'); }
         };
         window.closeLoginModal = function() { document.getElementById('login-modal').classList.add('hidden'); document.getElementById('login-modal').classList.remove('flex'); };
-        window.fillDemoAdmin = function() { setVal('login-username', 'admin'); setVal('login-password', 'admin123'); };
+        window.fillDemoAdmin = function() {
+            if (!IS_PREVIEW) return;
+            setVal('login-username', 'admin');
+            setVal('login-password', 'admin123');
+        };
 
         window.handleAdminLogin = async function(e) {
             e.preventDefault();
             const u = document.getElementById('login-username').value.trim();
             const pw = document.getElementById('login-password').value.trim();
 
-            if (supabase) {
+            // JIKA IS_PREVIEW = FALSE, WAJIB VALIDASI MURNI KE SUPABASE (TANPA DATA DUMMY)
+            if (!IS_PREVIEW) {
+                if (!supabase) {
+                    window.showToast('Koneksi Supabase belum aktif!', 'error');
+                    return;
+                }
+
                 try {
-                    const { data: adminRow } = await supabase
+                    // 1. Cek via Supabase Authentication (Email & Password di menu Authentication > Users)
+                    if (u.includes('@')) {
+                        const { data: authData, error: authErr } = await supabase.auth.signInWithPassword({
+                            email: u,
+                            password: pw
+                        });
+
+                        if (!authErr && authData?.user) {
+                            appState.isAdminLoggedIn = true;
+                            window.closeLoginModal();
+                            showAdminDashboard();
+                            window.showToast('Login Admin (Supabase Auth) berhasil!');
+                            return;
+                        }
+                    }
+
+                    // 2. Cek via Tabel database public.admin_users di Supabase
+                    const { data: adminRow, error: dbErr } = await supabase
                         .from('admin_users')
                         .select('*')
                         .eq('username', u)
                         .eq('password_hash', pw)
                         .maybeSingle();
+
+                    if (dbErr) {
+                        window.showToast('Gagal memverifikasi ke tabel admin_users: ' + dbErr.message, 'error');
+                        return;
+                    }
 
                     if (adminRow) {
                         appState.isAdminLoggedIn = true;
@@ -1675,16 +1685,23 @@
                         window.showToast('Login Admin Database berhasil!');
                         return;
                     }
+
+                    // Jika tidak terdaftar di Supabase Auth maupun tabel admin_users, TOLAK LOGIN!
+                    window.showToast('Akses ditolak! Akun tidak ditemukan di Supabase Auth maupun tabel admin_users.', 'error');
+                    return;
                 } catch (err) {
-                    console.warn("Fallback ke validasi admin lokal:", err);
+                    console.error("Login Error:", err);
+                    window.showToast('Terjadi kesalahan saat memverifikasi login ke Supabase.', 'error');
+                    return;
                 }
             }
 
-            if ((u.toLowerCase() === 'admin' || u.toLowerCase() === 'ibnukhanif') && pw === 'admin123') {
+            // HANYA JIKA IS_PREVIEW = TRUE (Mode Uji Coba Lokal), izinkan login dengan akun dummy
+            if (IS_PREVIEW && (u.toLowerCase() === 'admin' || u.toLowerCase() === 'ibnukhanif') && pw === 'admin123') {
                 appState.isAdminLoggedIn = true;
                 window.closeLoginModal();
                 showAdminDashboard();
-                window.showToast('Login berhasil!');
+                window.showToast('Login Mode Preview berhasil!');
             } else {
                 window.showToast('Username atau Password salah!', 'error');
             }
