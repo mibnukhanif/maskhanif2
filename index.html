@@ -191,16 +191,10 @@
                     <h3 class="text-xl font-extrabold font-display text-slate-900 dark:text-white">Login Admin Utama</h3>
                 </div>
             </div>
-            <div class="mb-5 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-slate-700 dark:text-slate-300">
-                <div class="flex items-center justify-between mb-1">
-                    <span class="font-bold text-amber-700 dark:text-amber-400 flex items-center gap-1.5"><i data-lucide="key-round" class="w-3.5 h-3.5"></i> Kredensial Admin</span>
-                    <button type="button" onclick="window.fillDemoAdmin()" class="text-[11px] font-semibold underline text-blue-600 dark:text-blue-400 hover:opacity-80">Isi Otomatis</button>
-                </div>
-                <p class="text-[11px] opacity-90">Username: <code class="font-mono font-bold">admin</code> &bull; Password: <code class="font-mono font-bold">admin123</code></p>
-            </div>
+            
             <form id="admin-login-form" onsubmit="window.handleAdminLogin(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5">Username Admin</label>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5">Username / Email Admin</label>
                     <div class="relative">
                         <i data-lucide="user-check" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
                         <input id="login-username" type="text" required placeholder="admin" class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
@@ -635,7 +629,7 @@
                     <div class="min-w-0">
                         <div class="flex items-center gap-2">
                             <h1 class="font-display font-extrabold text-sm sm:text-lg text-slate-900 dark:text-white truncate">Dashboard Admin Panel</h1>
-                            <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shrink-0">Realtime Sync Active</span>
+                            <span id="db-connection-badge" class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shrink-0">Realtime Sync Active</span>
                         </div>
                         <p id="admin-active-tab-label" class="text-[11px] sm:text-xs font-semibold text-amber-600 dark:text-amber-400 truncate">Menu Aktif: 1. Kelola Menu Navbar</p>
                     </div>
@@ -689,15 +683,15 @@
                     <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300"><i data-lucide="menu" class="w-5 h-5"></i></div>
                 </div>
                 <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex items-center justify-between">
-                    <div><p class="text-xs text-slate-500">Item Portfolio</p><p id="admin-count-portfolio" class="text-2xl font-extrabold font-display text-amber-500">6</p></div>
+                    <div><p class="text-xs text-slate-500">Item Portfolio</p><p id="admin-count-portfolio" class="text-2xl font-extrabold font-display text-amber-500">3</p></div>
                     <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500"><i data-lucide="image" class="w-5 h-5"></i></div>
                 </div>
                 <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex items-center justify-between">
-                    <div><p class="text-xs text-slate-500">Sertifikat</p><p id="admin-count-cert" class="text-2xl font-extrabold font-display text-blue-500">3</p></div>
+                    <div><p class="text-xs text-slate-500">Sertifikat</p><p id="admin-count-cert" class="text-2xl font-extrabold font-display text-blue-500">2</p></div>
                     <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500"><i data-lucide="award" class="w-5 h-5"></i></div>
                 </div>
                 <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 flex items-center justify-between">
-                    <div><p class="text-xs text-slate-500">Projek Lainnya</p><p id="admin-count-projects" class="text-2xl font-extrabold font-display text-emerald-500">6</p></div>
+                    <div><p class="text-xs text-slate-500">Projek Lainnya</p><p id="admin-count-projects" class="text-2xl font-extrabold font-display text-emerald-500">3</p></div>
                     <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500"><i data-lucide="briefcase" class="w-5 h-5"></i></div>
                 </div>
             </div>
@@ -743,17 +737,17 @@
                     </h3>
                     <form onsubmit="window.saveHeaderSettings(event)" class="space-y-5">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-                            <img id="admin-header-image-preview" src="" alt="Preview Hero" class="w-24 h-24 rounded-2xl object-cover border-2 border-amber-400 shrink-0">
+                            <img id="admin-header-image-preview" src="" alt="Preview Hero" class="w-24 h-24 rounded-2xl object-cover border-2 border-amber-400 shrink-0 bg-slate-200">
                             <div class="flex-1 space-y-2 w-full">
-                                <label class="block text-xs font-bold uppercase text-slate-500">URL Gambar Visual Hero (Terpisah dari Profil)</label>
-                                <input type="text" id="admin-hero-image-url" required class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs">
+                                <label class="block text-xs font-bold uppercase text-slate-500">URL / Data Gambar Visual Hero (Terpisah dari Profil)</label>
+                                <input type="text" id="admin-hero-image-url" required oninput="window.updateLiveImagePreview(this.value, 'admin-header-image-preview')" class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs">
                                 <div class="flex flex-wrap items-center gap-2 pt-1">
                                     <label class="cursor-pointer px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-400 text-slate-950 hover:bg-amber-300 transition inline-flex items-center gap-1.5">
                                         <i data-lucide="upload" class="w-3.5 h-3.5"></i>
                                         <span>Upload Gambar Hero dari Perangkat</span>
                                         <input type="file" accept="image/*" class="hidden" onchange="window.handleImageUpload(event, 'admin-hero-image-url', 'admin-header-image-preview')">
                                     </label>
-                                    <span class="text-[11px] text-slate-400">Gambar ini khusus untuk ilustrasi kanan pada seksi atas (Hero).</span>
+                                    <span class="text-[11px] text-slate-400">Otomatis dikompresi & disimpan ke kolom <code>hero_image_url</code> di Supabase.</span>
                                 </div>
                             </div>
                         </div>
@@ -790,7 +784,7 @@
                         </div>
                         <div class="pt-3">
                             <button type="submit" class="px-6 py-3 rounded-xl font-bold text-xs bg-slate-900 dark:bg-amber-400 text-white dark:text-slate-950 hover:opacity-90 transition flex items-center gap-2">
-                                <i data-lucide="save" class="w-4 h-4"></i><span>Simpan Perubahan Header</span>
+                                <i data-lucide="save" class="w-4 h-4"></i><span>Simpan Perubahan Header ke Database</span>
                             </button>
                         </div>
                     </form>
@@ -806,17 +800,17 @@
                     </h3>
                     <form onsubmit="window.saveAboutSettings(event)" class="space-y-5">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-                            <img id="admin-about-preview" src="" alt="Preview Profil" class="w-24 h-24 rounded-2xl object-cover border-2 border-amber-400 shrink-0">
+                            <img id="admin-about-preview" src="" alt="Preview Profil" class="w-24 h-24 rounded-2xl object-cover border-2 border-amber-400 shrink-0 bg-slate-200">
                             <div class="flex-1 space-y-2 w-full">
-                                <label class="block text-xs font-bold uppercase text-slate-500">URL Foto Profil Tentang Saya (Terpisah dari Hero)</label>
-                                <input type="text" id="admin-about-photo-url" required class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs">
+                                <label class="block text-xs font-bold uppercase text-slate-500">URL / Data Foto Profil Tentang Saya (Terpisah dari Hero)</label>
+                                <input type="text" id="admin-about-photo-url" required oninput="window.updateLiveImagePreview(this.value, 'admin-about-preview')" class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs">
                                 <div class="flex flex-wrap items-center gap-2 pt-1">
                                     <label class="cursor-pointer px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-400 text-slate-950 hover:bg-amber-300 transition inline-flex items-center gap-1.5">
                                         <i data-lucide="upload" class="w-3.5 h-3.5"></i>
                                         <span>Upload Foto Profil dari Perangkat</span>
                                         <input type="file" accept="image/*" class="hidden" onchange="window.handleImageUpload(event, 'admin-about-photo-url', 'admin-about-preview')">
                                     </label>
-                                    <span class="text-[11px] text-slate-400">Favicon tab browser akan otomatis tersinkronisasi dengan foto ini.</span>
+                                    <span class="text-[11px] text-slate-400">Tersimpan ke <code>about_photo_url</code> di Supabase & otomatis memperbarui Favicon.</span>
                                 </div>
                             </div>
                         </div>
@@ -860,7 +854,7 @@
                         </div>
 
                         <button type="submit" class="px-6 py-3 rounded-xl font-bold text-xs bg-slate-900 dark:bg-amber-400 text-white dark:text-slate-950 hover:opacity-90 transition flex items-center gap-2">
-                            <i data-lucide="save" class="w-4 h-4"></i><span>Simpan Profil, Statistik & Tag</span>
+                            <i data-lucide="save" class="w-4 h-4"></i><span>Simpan Profil, Statistik & Tag ke Database</span>
                         </button>
                     </form>
                 </div>
@@ -877,10 +871,13 @@
                             <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Kategori</label><input type="text" id="portfolio-cat-input" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm"></div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-500 mb-1">URL / Upload Gambar Karya</label>
-                                <input type="text" id="portfolio-img-input" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm mb-2">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <img id="portfolio-form-preview" src="https://placehold.co/200x200/0F172A/FACC15?text=Preview" alt="Preview Portfolio" class="w-16 h-16 rounded-xl object-cover border border-amber-400 shrink-0 bg-slate-100">
+                                    <input type="text" id="portfolio-img-input" required oninput="window.updateLiveImagePreview(this.value, 'portfolio-form-preview')" placeholder="https://... atau Upload File" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs">
+                                </div>
                                 <label class="cursor-pointer px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-400/20 text-amber-700 dark:text-amber-300 hover:bg-amber-400/30 transition inline-flex items-center gap-1.5">
-                                    <i data-lucide="upload" class="w-3.5 h-3.5"></i><span>Pilih File Gambar</span>
-                                    <input type="file" accept="image/*" class="hidden" onchange="window.handleImageUpload(event, 'portfolio-img-input')">
+                                    <i data-lucide="upload" class="w-3.5 h-3.5"></i><span>Pilih File Gambar dari Perangkat</span>
+                                    <input type="file" accept="image/*" class="hidden" onchange="window.handleImageUpload(event, 'portfolio-img-input', 'portfolio-form-preview')">
                                 </label>
                             </div>
                             <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Deskripsi</label><textarea id="portfolio-desc-input" rows="3" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm"></textarea></div>
@@ -908,10 +905,13 @@
                             <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Lembaga Penerbit & Tahun</label><input type="text" id="cert-issuer-input" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm"></div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-500 mb-1">URL / Upload Sertifikat</label>
-                                <input type="text" id="cert-img-input" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm mb-2">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <img id="cert-form-preview" src="https://placehold.co/200x200/0F172A/38BDF8?text=Preview" alt="Preview Sertifikat" class="w-16 h-16 rounded-xl object-cover border border-blue-400 shrink-0 bg-slate-100">
+                                    <input type="text" id="cert-img-input" required oninput="window.updateLiveImagePreview(this.value, 'cert-form-preview')" placeholder="https://... atau Upload File" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs">
+                                </div>
                                 <label class="cursor-pointer px-3.5 py-2 rounded-xl text-xs font-bold bg-blue-500/15 text-blue-600 dark:text-blue-400 hover:bg-blue-500/25 transition inline-flex items-center gap-1.5">
                                     <i data-lucide="upload" class="w-3.5 h-3.5"></i><span>Upload File Sertifikat</span>
-                                    <input type="file" accept="image/*" class="hidden" onchange="window.handleImageUpload(event, 'cert-img-input')">
+                                    <input type="file" accept="image/*" class="hidden" onchange="window.handleImageUpload(event, 'cert-img-input', 'cert-form-preview')">
                                 </label>
                             </div>
                             <div class="flex items-center gap-2 pt-2">
@@ -945,10 +945,13 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-500 mb-1">URL / Upload Thumbnail</label>
-                                <input type="text" id="project-img-input" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm mb-2">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <img id="project-form-preview" src="https://placehold.co/200x200/0F172A/10B981?text=Preview" alt="Preview Projek" class="w-16 h-16 rounded-xl object-cover border border-emerald-400 shrink-0 bg-slate-100">
+                                    <input type="text" id="project-img-input" required oninput="window.updateLiveImagePreview(this.value, 'project-form-preview')" placeholder="https://... atau Upload File" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs">
+                                </div>
                                 <label class="cursor-pointer px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/25 transition inline-flex items-center gap-1.5">
                                     <i data-lucide="upload" class="w-3.5 h-3.5"></i><span>Upload Thumbnail</span>
-                                    <input type="file" accept="image/*" class="hidden" onchange="window.handleImageUpload(event, 'project-img-input')">
+                                    <input type="file" accept="image/*" class="hidden" onchange="window.handleImageUpload(event, 'project-img-input', 'project-form-preview')">
                                 </label>
                             </div>
                             <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Deskripsi Singkat</label><textarea id="project-desc-input" rows="3" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm"></textarea></div>
@@ -991,10 +994,10 @@
                     <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white mb-6 flex items-center gap-2"><i data-lucide="panel-bottom" class="w-5 h-5 text-amber-500"></i><span>Logo Website & Footer</span></h3>
                     <form onsubmit="window.saveFooterSettings(event)" class="space-y-4">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-                            <img id="admin-logo-preview" src="" alt="Logo" class="w-16 h-16 rounded-2xl object-cover border border-amber-400">
+                            <img id="admin-logo-preview" src="" alt="Logo" class="w-16 h-16 rounded-2xl object-cover border border-amber-400 bg-slate-200">
                             <div class="flex-1 w-full space-y-2">
-                                <label class="block text-xs font-bold uppercase text-slate-500">URL Logo Website</label>
-                                <input type="text" id="admin-logo-url" required class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs">
+                                <label class="block text-xs font-bold uppercase text-slate-500">URL / Data Logo Website</label>
+                                <input type="text" id="admin-logo-url" required oninput="window.updateLiveImagePreview(this.value, 'admin-logo-preview')" class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs">
                                 <label class="cursor-pointer px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 inline-flex items-center gap-1.5">
                                     <i data-lucide="upload" class="w-3.5 h-3.5"></i><span>Upload Logo Baru</span>
                                     <input type="file" accept="image/*" class="hidden" onchange="window.handleImageUpload(event, 'admin-logo-url', 'admin-logo-preview')">
@@ -1015,6 +1018,10 @@
 
     <!-- JAVASCRIPT MODULE -->
     <script type="module">
+        // ============================================================================
+        // KONFIGURASI APLIKASI & SUPABASE
+        // Set IS_PREVIEW = false jika sudah mengisi SUPABASE_URL & SUPABASE_ANON_KEY
+        // ============================================================================
         const IS_PREVIEW = false;
         const SUPABASE_URL = "https://ibyvjqdmsssxfpfakels.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_se-1PN88mciY6QojjhDpAA_UVETa9nh";
@@ -1022,8 +1029,16 @@
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
         let supabase = null;
-        if (!IS_PREVIEW && SUPABASE_URL !== "https://ibyvjqdmsssxfpfakels.supabase.co" && SUPABASE_ANON_KEY !== "sb_publishable_se-1PN88mciY6QojjhDpAA_UVETa9nh") {
-            try { supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch (err) {}
+        const isSupabaseConfigured = !IS_PREVIEW &&
+            SUPABASE_URL && SUPABASE_URL !== "https://ibyvjqdmsssxfpfakels.supabase.co" &&
+            SUPABASE_ANON_KEY && SUPABASE_ANON_KEY !== "sb_publishable_se-1PN88mciY6QojjhDpAA_UVETa9nh";
+
+        if (isSupabaseConfigured) {
+            try {
+                supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            } catch (err) {
+                console.error("Gagal menginisialisasi Supabase Client:", err);
+            }
         }
 
         const INITIAL_DATA = {
@@ -1093,17 +1108,133 @@
             darkMode: false
         };
 
+        // ============================================================================
+        // AUTO SETUP & SINKRONISASI DATABASE SUPABASE (MENYIMPAN SEMUA FOTO & DATA)
+        // ============================================================================
         async function autoSetupDatabase() {
-            if (IS_PREVIEW || !supabase) {
+            const badge = document.getElementById('db-connection-badge');
+            if (!supabase) {
+                if (badge) badge.textContent = "Preview Local Mode";
                 renderAll();
                 return;
             }
+
             try {
-                const { data: profData } = await supabase.from('site_profile').select('*').eq('id', 1).maybeSingle();
-                if (profData) appState.profile = { ...appState.profile, ...profData };
+                if (badge) badge.textContent = "Supabase Cloud Connected";
+
+                // 1. Cek & Inisialisasi site_profile (Termasuk hero_image_url, about_photo_url, logo_url)
+                const { data: profData, error: profErr } = await supabase
+                    .from('site_profile')
+                    .select('*')
+                    .eq('id', 1)
+                    .maybeSingle();
+
+                if (!profErr && profData) {
+                    appState.profile = { ...appState.profile, ...profData };
+                } else {
+                    await supabase.from('site_profile').upsert(appState.profile, { onConflict: 'id' });
+                }
+
+                // 2. Cek & Inisialisasi nav_menus
+                const { data: menuData, error: menuErr } = await supabase
+                    .from('nav_menus')
+                    .select('*')
+                    .order('sort_order', { ascending: true });
+
+                if (!menuErr && menuData && menuData.length > 0) {
+                    appState.menus = menuData;
+                } else {
+                    await supabase.from('nav_menus').upsert(appState.menus, { onConflict: 'id' });
+                }
+
+                // 3. Cek & Inisialisasi portfolios (Beserta image_url)
+                const { data: portData, error: portErr } = await supabase
+                    .from('portfolios')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (!portErr && portData && portData.length > 0) {
+                    appState.portfolios = portData;
+                } else {
+                    await supabase.from('portfolios').upsert(appState.portfolios, { onConflict: 'id' });
+                }
+
+                // 4. Cek & Inisialisasi certificates (Beserta image_url)
+                const { data: certData, error: certErr } = await supabase
+                    .from('certificates')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (!certErr && certData && certData.length > 0) {
+                    appState.certificates = certData;
+                } else {
+                    await supabase.from('certificates').upsert(appState.certificates, { onConflict: 'id' });
+                }
+
+                // 5. Cek & Inisialisasi other_projects (Beserta thumbnail_url)
+                const { data: projData, error: projErr } = await supabase
+                    .from('other_projects')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (!projErr && projData && projData.length > 0) {
+                    appState.otherProjects = projData;
+                } else {
+                    await supabase.from('other_projects').upsert(appState.otherProjects, { onConflict: 'id' });
+                }
+
                 renderAll();
             } catch (e) {
+                console.error("Supabase Auto Setup Error:", e);
                 renderAll();
+            }
+        }
+
+        // Fungsi Helper Menyimpan site_profile (Foto Hero, Foto Profil, Logo, Statistik, Kontak, Footer) ke Supabase
+        async function syncProfileToSupabase() {
+            if (!supabase) return true;
+            try {
+                const payload = {
+                    id: 1,
+                    logo_url: appState.profile.logo_url,
+                    hero_image_url: appState.profile.hero_image_url,
+                    about_photo_url: appState.profile.about_photo_url,
+                    hero_badge: appState.profile.hero_badge,
+                    hero_title: appState.profile.hero_title,
+                    hero_subtitle: appState.profile.hero_subtitle,
+                    hero_cta1_text: appState.profile.hero_cta1_text,
+                    hero_cta1_link: appState.profile.hero_cta1_link,
+                    hero_cta2_text: appState.profile.hero_cta2_text,
+                    hero_cta2_link: appState.profile.hero_cta2_link,
+                    about_title: appState.profile.about_title,
+                    about_description: appState.profile.about_description,
+                    exp_years: appState.profile.exp_years,
+                    completed_projects: appState.profile.completed_projects,
+                    happy_clients: appState.profile.happy_clients,
+                    professional_tags: appState.profile.professional_tags,
+                    contact_title: appState.profile.contact_title,
+                    contact_whatsapp: appState.profile.contact_whatsapp,
+                    contact_whatsapp_link: appState.profile.contact_whatsapp_link,
+                    contact_email: appState.profile.contact_email,
+                    contact_instagram: appState.profile.contact_instagram,
+                    contact_instagram_link: appState.profile.contact_instagram_link,
+                    contact_cta_text: appState.profile.contact_cta_text,
+                    footer_name: appState.profile.footer_name,
+                    footer_year: appState.profile.footer_year,
+                    footer_tagline: appState.profile.footer_tagline,
+                    updated_at: new Date().toISOString()
+                };
+                const { error } = await supabase.from('site_profile').upsert(payload, { onConflict: 'id' });
+                if (error) {
+                    console.error("Gagal menyimpan site_profile ke Supabase:", error);
+                    window.showToast("Gagal simpan ke Supabase: " + error.message, "error");
+                    return false;
+                }
+                return true;
+            } catch (err) {
+                console.error("Exception saat syncProfileToSupabase:", err);
+                window.showToast("Terjadi kesalahan koneksi database.", "error");
+                return false;
             }
         }
 
@@ -1114,6 +1245,12 @@
             if (fav) fav.href = photoUrl;
             if (appleFav) appleFav.href = photoUrl;
         }
+
+        window.updateLiveImagePreview = function(url, previewId) {
+            if (!previewId || !url) return;
+            const img = document.getElementById(previewId);
+            if (img) img.src = url;
+        };
 
         function renderAll() {
             const p = appState.profile;
@@ -1141,19 +1278,23 @@
                 footerLinks.innerHTML = sortedMenus.map(m => `<a href="${m.target_url}" class="hover:text-amber-400 transition flex items-center gap-1.5"><span class="text-amber-400">&bull;</span><span>${m.label}</span></a>`).join('');
             }
 
-            // Hero Section (Menggunakan hero_image_url mandiri)
+            // Hero Section (Menggunakan hero_image_url mandiri, tidak terhubung dengan Foto Profil)
             setText('hero-badge-text', p.hero_badge);
             const heroHeadlineEl = document.getElementById('hero-headline');
-            if (heroHeadlineEl && p.hero_title.includes('–')) {
-                const parts = p.hero_title.split('–');
-                heroHeadlineEl.innerHTML = `${parts[0]}– <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-blue-600 dark:from-amber-400 dark:via-amber-300 dark:to-blue-400">${parts.slice(1).join('–')}</span>`;
+            if (heroHeadlineEl) {
+                if (p.hero_title.includes('–')) {
+                    const parts = p.hero_title.split('–');
+                    heroHeadlineEl.innerHTML = `${parts[0]}– <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-blue-600 dark:from-amber-400 dark:via-amber-300 dark:to-blue-400">${parts.slice(1).join('–')}</span>`;
+                } else {
+                    heroHeadlineEl.textContent = p.hero_title;
+                }
             }
             setText('hero-subheadline', p.hero_subtitle);
             setText('hero-cta1-label', p.hero_cta1_text);
             setAttr('hero-cta1', 'href', p.hero_cta1_link);
             setText('hero-cta2-label', p.hero_cta2_text);
             setAttr('hero-cta2', 'href', p.hero_cta2_link);
-            setAttr('hero-image-display', 'src', p.hero_image_url || p.about_photo_url);
+            setAttr('hero-image-display', 'src', p.hero_image_url);
 
             // About Me Section (Menggunakan about_photo_url mandiri)
             setAttr('about-photo', 'src', p.about_photo_url);
@@ -1473,10 +1614,32 @@
         window.closeLoginModal = function() { document.getElementById('login-modal').classList.add('hidden'); document.getElementById('login-modal').classList.remove('flex'); };
         window.fillDemoAdmin = function() { setVal('login-username', 'admin'); setVal('login-password', 'admin123'); };
 
-        window.handleAdminLogin = function(e) {
+        window.handleAdminLogin = async function(e) {
             e.preventDefault();
             const u = document.getElementById('login-username').value.trim();
             const pw = document.getElementById('login-password').value.trim();
+
+            if (supabase) {
+                try {
+                    const { data: adminRow } = await supabase
+                        .from('admin_users')
+                        .select('*')
+                        .eq('username', u)
+                        .eq('password_hash', pw)
+                        .maybeSingle();
+
+                    if (adminRow) {
+                        appState.isAdminLoggedIn = true;
+                        window.closeLoginModal();
+                        showAdminDashboard();
+                        window.showToast('Login Admin Database berhasil!');
+                        return;
+                    }
+                } catch (err) {
+                    console.warn("Fallback ke validasi admin lokal:", err);
+                }
+            }
+
             if ((u.toLowerCase() === 'admin' || u.toLowerCase() === 'ibnukhanif') && pw === 'admin123') {
                 appState.isAdminLoggedIn = true;
                 window.closeLoginModal();
@@ -1507,28 +1670,90 @@
             window.showToast('Admin logout.');
         };
 
+        const TAB_LABELS = {
+            menu: "1. Kelola Menu Navbar",
+            header: "2. Kelola Header (Hero)",
+            about: "3. Profil, Statistik & Tag",
+            portfolio: "4. Kelola Portfolio",
+            sertifikat: "5. Kelola Sertifikat",
+            project: "6. Kelola Projek Lainnya",
+            contact: "7. Kelola Kontak",
+            footer: "8. Kelola Footer & Logo"
+        };
+
         window.switchAdminTab = function(tab) {
             appState.activeAdminTab = tab;
             document.querySelectorAll('.admin-section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(`admin-tab-${tab}`).classList.remove('hidden');
+            const activeSection = document.getElementById(`admin-tab-${tab}`);
+            if (activeSection) activeSection.classList.remove('hidden');
+
+            setText('admin-active-tab-label', `Menu Aktif: ${TAB_LABELS[tab] || tab}`);
+
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                const isMatch = btn.getAttribute('data-admin-tab') === tab;
+                if (isMatch) {
+                    btn.classList.add('bg-amber-400', 'text-slate-950');
+                } else {
+                    btn.classList.remove('bg-amber-400', 'text-slate-950');
+                }
+            });
+
             window.closeAdminMobileDropdown();
             if (window.lucide) window.lucide.createIcons();
         };
 
+        // ============================================================================
+        // FUNGSI UPLOAD & KOMPRESI GAMBAR OTOMATIS AGAR TERSIMPAN LANCAR KE SUPABASE
+        // ============================================================================
         window.handleImageUpload = function(event, inputId, previewId) {
-            const f = event.target.files?.[0];
-            if (!f) return;
-            const r = new FileReader();
-            r.onload = e => {
-                setVal(inputId, e.target.result);
-                if (previewId) setAttr(previewId, 'src', e.target.result);
-                window.showToast('Gambar berhasil dimuat!');
+            const file = event.target.files?.[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const rawDataUrl = e.target.result;
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const MAX_DIMENSION = 1200;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height && width > MAX_DIMENSION) {
+                        height = Math.round((height * MAX_DIMENSION) / width);
+                        width = MAX_DIMENSION;
+                    } else if (height > MAX_DIMENSION) {
+                        width = Math.round((width * MAX_DIMENSION) / height);
+                        height = MAX_DIMENSION;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Hasilkan Data URL terkompresi agar ringan disimpan di kolom TEXT Supabase
+                    const optimizedDataUrl = canvas.toDataURL('image/jpeg', 0.84);
+                    setVal(inputId, optimizedDataUrl);
+                    if (previewId) setAttr(previewId, 'src', optimizedDataUrl);
+                    window.showToast('Foto berhasil dioptimalkan & siap disimpan ke database!');
+                };
+                img.onerror = () => {
+                    setVal(inputId, rawDataUrl);
+                    if (previewId) setAttr(previewId, 'src', rawDataUrl);
+                    window.showToast('Gambar berhasil dimuat!');
+                };
+                img.src = rawDataUrl;
             };
-            r.readAsDataURL(f);
+            reader.readAsDataURL(file);
         };
 
-        // CRUD & Saving settings
-        window.saveHeaderSettings = function(e) {
+        // ============================================================================
+        // CRUD & PENYIMPANAN LANGSUNG KE SUPABASE DATABASE
+        // ============================================================================
+
+        // 1. Simpan Header (Hero) Mandiri + Foto Hero ke site_profile
+        window.saveHeaderSettings = async function(e) {
             e.preventDefault();
             appState.profile.hero_image_url = document.getElementById('admin-hero-image-url').value.trim();
             appState.profile.hero_badge = document.getElementById('admin-hero-badge').value.trim();
@@ -1538,11 +1763,14 @@
             appState.profile.hero_cta1_link = document.getElementById('admin-hero-cta1-link').value.trim();
             appState.profile.hero_cta2_text = document.getElementById('admin-hero-cta2-text').value.trim();
             appState.profile.hero_cta2_link = document.getElementById('admin-hero-cta2-link').value.trim();
+
+            const ok = await syncProfileToSupabase();
             renderAll();
-            window.showToast('Pengaturan Header (Hero) berhasil disimpan secara mandiri!');
+            if (ok) window.showToast('Header & Gambar Hero berhasil disimpan ke database!');
         };
 
-        window.saveAboutSettings = function(e) {
+        // 2. Simpan Profil Tentang Saya Mandiri + Foto Profil ke site_profile
+        window.saveAboutSettings = async function(e) {
             e.preventDefault();
             appState.profile.about_photo_url = document.getElementById('admin-about-photo-url').value.trim();
             appState.profile.about_title = document.getElementById('admin-about-title').value.trim();
@@ -1551,114 +1779,260 @@
             appState.profile.completed_projects = document.getElementById('admin-stat-projects').value.trim();
             appState.profile.happy_clients = document.getElementById('admin-stat-clients').value.trim();
             appState.profile.professional_tags = document.getElementById('admin-about-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+
+            const ok = await syncProfileToSupabase();
             renderAll();
-            window.showToast('Profil Tentang Saya & Foto Profil berhasil disimpan secara mandiri!');
+            if (ok) window.showToast('Foto Profil & Tentang Saya berhasil disimpan ke database!');
         };
 
-        window.saveMenuItem = function(e) {
+        // 3. Kelola Menu Navbar -> Tabel nav_menus
+        window.saveMenuItem = async function(e) {
             e.preventDefault();
             const editId = document.getElementById('menu-edit-id').value;
             const label = document.getElementById('menu-label-input').value.trim();
             const target_url = document.getElementById('menu-target-input').value.trim();
             const sort_order = Number(document.getElementById('menu-order-input').value) || 1;
+            let savedItem;
+
             if (editId) {
                 const i = appState.menus.findIndex(m => m.id === editId);
-                if (i > -1) appState.menus[i] = { ...appState.menus[i], label, target_url, sort_order };
+                if (i > -1) {
+                    appState.menus[i] = { ...appState.menus[i], label, target_url, sort_order };
+                    savedItem = appState.menus[i];
+                }
             } else {
-                appState.menus.push({ id: 'menu-' + Date.now(), label, target_url, sort_order });
+                savedItem = { id: 'menu-' + Date.now(), label, target_url, sort_order };
+                appState.menus.push(savedItem);
             }
-            window.resetMenuForm(); renderAll(); window.showToast('Menu disimpan!');
+
+            if (supabase && savedItem) {
+                const { error } = await supabase.from('nav_menus').upsert({
+                    id: savedItem.id,
+                    label: savedItem.label,
+                    target_url: savedItem.target_url,
+                    sort_order: savedItem.sort_order
+                }, { onConflict: 'id' });
+                if (error) window.showToast('Gagal simpan menu ke Supabase: ' + error.message, 'error');
+            }
+
+            window.resetMenuForm();
+            renderAll();
+            window.showToast('Menu berhasil disimpan!');
         };
+
         window.editMenuItem = function(id) {
             const m = appState.menus.find(x => x.id === id);
             if (!m) return;
             setVal('menu-edit-id', m.id); setVal('menu-label-input', m.label); setVal('menu-target-input', m.target_url); setVal('menu-order-input', m.sort_order);
         };
-        window.duplicateMenuItem = function(id) {
+
+        window.duplicateMenuItem = async function(id) {
             const m = appState.menus.find(x => x.id === id);
             if (!m) return;
-            appState.menus.push({ ...structuredClone(m), id: 'menu-' + Date.now(), label: m.label + ' (Copy)' });
-            renderAll(); window.showToast('Menu diduplikat!');
+            const copyItem = { ...structuredClone(m), id: 'menu-' + Date.now(), label: m.label + ' (Copy)' };
+            appState.menus.push(copyItem);
+            if (supabase) {
+                await supabase.from('nav_menus').upsert({
+                    id: copyItem.id,
+                    label: copyItem.label,
+                    target_url: copyItem.target_url,
+                    sort_order: copyItem.sort_order
+                }, { onConflict: 'id' });
+            }
+            renderAll();
+            window.showToast('Menu berhasil diduplikat!');
         };
+
         window.deleteMenuItem = function(id) {
-            window.askConfirm('Hapus Menu', 'Yakin ingin menghapus menu ini?', () => {
+            window.askConfirm('Hapus Menu', 'Yakin ingin menghapus menu ini?', async () => {
                 appState.menus = appState.menus.filter(x => x.id !== id);
-                renderAll(); window.showToast('Menu dihapus.');
+                if (supabase) {
+                    await supabase.from('nav_menus').delete().eq('id', id);
+                }
+                renderAll();
+                window.showToast('Menu dihapus.');
             });
         };
-        window.resetMenuForm = function() { setVal('menu-edit-id', ''); setVal('menu-label-input', ''); setVal('menu-target-input', ''); setVal('menu-order-input', appState.menus.length + 1); };
 
-        // Portfolio CRUD & Duplicate
-        window.savePortfolioItem = function(e) {
+        window.resetMenuForm = function() {
+            setVal('menu-edit-id', ''); setVal('menu-label-input', ''); setVal('menu-target-input', ''); setVal('menu-order-input', appState.menus.length + 1);
+        };
+
+        // 4. Kelola Portfolio & Foto Portfolio -> Tabel portfolios
+        window.savePortfolioItem = async function(e) {
             e.preventDefault();
             const editId = document.getElementById('portfolio-edit-id').value;
             const title = document.getElementById('portfolio-title-input').value.trim();
             const category = document.getElementById('portfolio-cat-input').value.trim();
             const image_url = document.getElementById('portfolio-img-input').value.trim();
             const description = document.getElementById('portfolio-desc-input').value.trim();
+            let savedItem;
+
             if (editId) {
                 const i = appState.portfolios.findIndex(x => x.id === editId);
-                if (i > -1) appState.portfolios[i] = { ...appState.portfolios[i], title, category, image_url, description };
+                if (i > -1) {
+                    appState.portfolios[i] = { ...appState.portfolios[i], title, category, image_url, description };
+                    savedItem = appState.portfolios[i];
+                }
             } else {
-                appState.portfolios.unshift({ id: 'port-' + Date.now(), title, category, image_url, description });
+                savedItem = { id: 'port-' + Date.now(), title, category, image_url, description, created_at: new Date().toISOString() };
+                appState.portfolios.unshift(savedItem);
             }
-            window.resetPortfolioForm(); renderAll(); window.showToast('Portfolio disimpan!');
+
+            if (supabase && savedItem) {
+                const { error } = await supabase.from('portfolios').upsert({
+                    id: savedItem.id,
+                    title: savedItem.title,
+                    category: savedItem.category,
+                    image_url: savedItem.image_url,
+                    description: savedItem.description
+                }, { onConflict: 'id' });
+                if (error) {
+                    window.showToast('Gagal simpan foto portfolio ke Supabase: ' + error.message, 'error');
+                    return;
+                }
+            }
+
+            window.resetPortfolioForm();
+            renderAll();
+            window.showToast('Portfolio & Foto berhasil disimpan!');
         };
+
         window.editPortfolioItem = function(id) {
             const item = appState.portfolios.find(x => x.id === id);
             if (!item) return;
-            setVal('portfolio-edit-id', item.id); setVal('portfolio-title-input', item.title); setVal('portfolio-cat-input', item.category); setVal('portfolio-img-input', item.image_url); setVal('portfolio-desc-input', item.description);
+            setVal('portfolio-edit-id', item.id);
+            setVal('portfolio-title-input', item.title);
+            setVal('portfolio-cat-input', item.category);
+            setVal('portfolio-img-input', item.image_url);
+            setAttr('portfolio-form-preview', 'src', item.image_url);
+            setVal('portfolio-desc-input', item.description);
         };
-        window.duplicatePortfolioItem = function(id) {
+
+        window.duplicatePortfolioItem = async function(id) {
             const orig = appState.portfolios.find(x => x.id === id);
             if (!orig) return;
-            appState.portfolios.unshift({ ...structuredClone(orig), id: 'port-' + Date.now(), title: orig.title + ' (Salinan)' });
-            renderAll(); window.showToast('Portfolio diduplikat!');
+            const copyItem = { ...structuredClone(orig), id: 'port-' + Date.now(), title: orig.title + ' (Salinan)' };
+            appState.portfolios.unshift(copyItem);
+            if (supabase) {
+                await supabase.from('portfolios').upsert({
+                    id: copyItem.id,
+                    title: copyItem.title,
+                    category: copyItem.category,
+                    image_url: copyItem.image_url,
+                    description: copyItem.description
+                }, { onConflict: 'id' });
+            }
+            renderAll();
+            window.showToast('Portfolio berhasil diduplikat!');
         };
+
         window.deletePortfolioItem = function(id) {
-            window.askConfirm('Hapus Portfolio', 'Yakin ingin menghapus?', () => {
+            window.askConfirm('Hapus Portfolio', 'Yakin ingin menghapus karya portfolio ini?', async () => {
                 appState.portfolios = appState.portfolios.filter(x => x.id !== id);
-                renderAll(); window.showToast('Portfolio dihapus.');
+                if (supabase) {
+                    await supabase.from('portfolios').delete().eq('id', id);
+                }
+                renderAll();
+                window.showToast('Portfolio dihapus.');
             });
         };
-        window.resetPortfolioForm = function() { setVal('portfolio-edit-id', ''); setVal('portfolio-title-input', ''); setVal('portfolio-cat-input', ''); setVal('portfolio-img-input', ''); setVal('portfolio-desc-input', ''); };
 
-        // Certificate CRUD & Duplicate
-        window.saveCertificateItem = function(e) {
+        window.resetPortfolioForm = function() {
+            setVal('portfolio-edit-id', '');
+            setVal('portfolio-title-input', '');
+            setVal('portfolio-cat-input', '');
+            setVal('portfolio-img-input', '');
+            setAttr('portfolio-form-preview', 'src', 'https://placehold.co/200x200/0F172A/FACC15?text=Preview');
+            setVal('portfolio-desc-input', '');
+        };
+
+        // 5. Kelola Sertifikat & Foto Sertifikat -> Tabel certificates
+        window.saveCertificateItem = async function(e) {
             e.preventDefault();
             const editId = document.getElementById('cert-edit-id').value;
             const title = document.getElementById('cert-title-input').value.trim();
             const issuer = document.getElementById('cert-issuer-input').value.trim();
             const image_url = document.getElementById('cert-img-input').value.trim();
+            let savedItem;
+
             if (editId) {
                 const i = appState.certificates.findIndex(x => x.id === editId);
-                if (i > -1) appState.certificates[i] = { ...appState.certificates[i], title, issuer, image_url };
+                if (i > -1) {
+                    appState.certificates[i] = { ...appState.certificates[i], title, issuer, image_url };
+                    savedItem = appState.certificates[i];
+                }
             } else {
-                appState.certificates.unshift({ id: 'cert-' + Date.now(), title, issuer, image_url });
+                savedItem = { id: 'cert-' + Date.now(), title, issuer, image_url, created_at: new Date().toISOString() };
+                appState.certificates.unshift(savedItem);
             }
-            window.resetCertificateForm(); renderAll(); window.showToast('Sertifikat disimpan!');
+
+            if (supabase && savedItem) {
+                const { error } = await supabase.from('certificates').upsert({
+                    id: savedItem.id,
+                    title: savedItem.title,
+                    issuer: savedItem.issuer,
+                    image_url: savedItem.image_url
+                }, { onConflict: 'id' });
+                if (error) {
+                    window.showToast('Gagal simpan foto sertifikat ke Supabase: ' + error.message, 'error');
+                    return;
+                }
+            }
+
+            window.resetCertificateForm();
+            renderAll();
+            window.showToast('Sertifikat & Foto berhasil disimpan!');
         };
+
         window.editCertificateItem = function(id) {
             const cert = appState.certificates.find(x => x.id === id);
             if (!cert) return;
-            setVal('cert-edit-id', cert.id); setVal('cert-title-input', cert.title); setVal('cert-issuer-input', cert.issuer); setVal('cert-img-input', cert.image_url);
+            setVal('cert-edit-id', cert.id);
+            setVal('cert-title-input', cert.title);
+            setVal('cert-issuer-input', cert.issuer);
+            setVal('cert-img-input', cert.image_url);
+            setAttr('cert-form-preview', 'src', cert.image_url);
         };
-        window.duplicateCertificateItem = function(id) {
+
+        window.duplicateCertificateItem = async function(id) {
             const orig = appState.certificates.find(x => x.id === id);
             if (!orig) return;
-            appState.certificates.unshift({ ...structuredClone(orig), id: 'cert-' + Date.now(), title: orig.title + ' (Salinan)' });
-            renderAll(); window.showToast('Sertifikat diduplikat!');
+            const copyItem = { ...structuredClone(orig), id: 'cert-' + Date.now(), title: orig.title + ' (Salinan)' };
+            appState.certificates.unshift(copyItem);
+            if (supabase) {
+                await supabase.from('certificates').upsert({
+                    id: copyItem.id,
+                    title: copyItem.title,
+                    issuer: copyItem.issuer,
+                    image_url: copyItem.image_url
+                }, { onConflict: 'id' });
+            }
+            renderAll();
+            window.showToast('Sertifikat berhasil diduplikat!');
         };
+
         window.deleteCertificateItem = function(id) {
-            window.askConfirm('Hapus Sertifikat', 'Yakin ingin menghapus?', () => {
+            window.askConfirm('Hapus Sertifikat', 'Yakin ingin menghapus sertifikat ini?', async () => {
                 appState.certificates = appState.certificates.filter(x => x.id !== id);
-                renderAll(); window.showToast('Sertifikat dihapus.');
+                if (supabase) {
+                    await supabase.from('certificates').delete().eq('id', id);
+                }
+                renderAll();
+                window.showToast('Sertifikat dihapus.');
             });
         };
-        window.resetCertificateForm = function() { setVal('cert-edit-id', ''); setVal('cert-title-input', ''); setVal('cert-issuer-input', ''); setVal('cert-img-input', ''); };
 
-        // Projects CRUD & Duplicate
-        window.saveProjectItem = function(e) {
+        window.resetCertificateForm = function() {
+            setVal('cert-edit-id', '');
+            setVal('cert-title-input', '');
+            setVal('cert-issuer-input', '');
+            setVal('cert-img-input', '');
+            setAttr('cert-form-preview', 'src', 'https://placehold.co/200x200/0F172A/38BDF8?text=Preview');
+        };
+
+        // 6. Kelola Projek Lainnya & Foto Thumbnail -> Tabel other_projects
+        window.saveProjectItem = async function(e) {
             e.preventDefault();
             const editId = document.getElementById('project-edit-id').value;
             const title = document.getElementById('project-title-input').value.trim();
@@ -1666,34 +2040,93 @@
             const thumbnail_url = document.getElementById('project-img-input').value.trim();
             const short_description = document.getElementById('project-desc-input').value.trim();
             const project_link = document.getElementById('project-link-input').value.trim() || '#contact';
+            let savedItem;
+
             if (editId) {
                 const i = appState.otherProjects.findIndex(x => x.id === editId);
-                if (i > -1) appState.otherProjects[i] = { ...appState.otherProjects[i], title, category, thumbnail_url, short_description, project_link };
+                if (i > -1) {
+                    appState.otherProjects[i] = { ...appState.otherProjects[i], title, category, thumbnail_url, short_description, project_link };
+                    savedItem = appState.otherProjects[i];
+                }
             } else {
-                appState.otherProjects.unshift({ id: 'proj-' + Date.now(), title, category, thumbnail_url, short_description, project_link });
+                savedItem = { id: 'proj-' + Date.now(), title, category, thumbnail_url, short_description, project_link, created_at: new Date().toISOString() };
+                appState.otherProjects.unshift(savedItem);
             }
-            window.resetProjectForm(); renderAll(); window.showToast('Projek disimpan!');
+
+            if (supabase && savedItem) {
+                const { error } = await supabase.from('other_projects').upsert({
+                    id: savedItem.id,
+                    title: savedItem.title,
+                    category: savedItem.category,
+                    thumbnail_url: savedItem.thumbnail_url,
+                    short_description: savedItem.short_description,
+                    project_link: savedItem.project_link
+                }, { onConflict: 'id' });
+                if (error) {
+                    window.showToast('Gagal simpan foto projek ke Supabase: ' + error.message, 'error');
+                    return;
+                }
+            }
+
+            window.resetProjectForm();
+            renderAll();
+            window.showToast('Projek & Thumbnail berhasil disimpan!');
         };
+
         window.editProjectItem = function(id) {
             const p = appState.otherProjects.find(x => x.id === id);
             if (!p) return;
-            setVal('project-edit-id', p.id); setVal('project-title-input', p.title); setVal('project-cat-input', p.category); setVal('project-img-input', p.thumbnail_url); setVal('project-desc-input', p.short_description); setVal('project-link-input', p.project_link);
+            setVal('project-edit-id', p.id);
+            setVal('project-title-input', p.title);
+            setVal('project-cat-input', p.category);
+            setVal('project-img-input', p.thumbnail_url);
+            setAttr('project-form-preview', 'src', p.thumbnail_url);
+            setVal('project-desc-input', p.short_description);
+            setVal('project-link-input', p.project_link);
         };
-        window.duplicateProjectItem = function(id) {
+
+        window.duplicateProjectItem = async function(id) {
             const orig = appState.otherProjects.find(x => x.id === id);
             if (!orig) return;
-            appState.otherProjects.unshift({ ...structuredClone(orig), id: 'proj-' + Date.now(), title: orig.title + ' (Salinan)' });
-            renderAll(); window.showToast('Projek diduplikat!');
+            const copyItem = { ...structuredClone(orig), id: 'proj-' + Date.now(), title: orig.title + ' (Salinan)' };
+            appState.otherProjects.unshift(copyItem);
+            if (supabase) {
+                await supabase.from('other_projects').upsert({
+                    id: copyItem.id,
+                    title: copyItem.title,
+                    category: copyItem.category,
+                    thumbnail_url: copyItem.thumbnail_url,
+                    short_description: copyItem.short_description,
+                    project_link: copyItem.project_link
+                }, { onConflict: 'id' });
+            }
+            renderAll();
+            window.showToast('Projek berhasil diduplikat!');
         };
+
         window.deleteProjectItem = function(id) {
-            window.askConfirm('Hapus Projek', 'Yakin ingin menghapus?', () => {
+            window.askConfirm('Hapus Projek', 'Yakin ingin menghapus projek ini?', async () => {
                 appState.otherProjects = appState.otherProjects.filter(x => x.id !== id);
-                renderAll(); window.showToast('Projek dihapus.');
+                if (supabase) {
+                    await supabase.from('other_projects').delete().eq('id', id);
+                }
+                renderAll();
+                window.showToast('Projek dihapus.');
             });
         };
-        window.resetProjectForm = function() { setVal('project-edit-id', ''); setVal('project-title-input', ''); setVal('project-cat-input', 'Desain Logo'); setVal('project-img-input', ''); setVal('project-desc-input', ''); setVal('project-link-input', ''); };
 
-        window.saveContactSettings = function(e) {
+        window.resetProjectForm = function() {
+            setVal('project-edit-id', '');
+            setVal('project-title-input', '');
+            setVal('project-cat-input', 'Desain Logo');
+            setVal('project-img-input', '');
+            setAttr('project-form-preview', 'src', 'https://placehold.co/200x200/0F172A/10B981?text=Preview');
+            setVal('project-desc-input', '');
+            setVal('project-link-input', '');
+        };
+
+        // 7. Simpan Kontak ke site_profile
+        window.saveContactSettings = async function(e) {
             e.preventDefault();
             appState.profile.contact_title = document.getElementById('admin-contact-title').value.trim();
             appState.profile.contact_whatsapp = document.getElementById('admin-contact-wa').value.trim();
@@ -1702,25 +2135,35 @@
             appState.profile.contact_instagram = document.getElementById('admin-contact-ig').value.trim();
             appState.profile.contact_instagram_link = document.getElementById('admin-contact-ig-link').value.trim();
             appState.profile.contact_cta_text = document.getElementById('admin-contact-cta').value.trim();
-            renderAll(); window.showToast('Kontak disimpan!');
+
+            const ok = await syncProfileToSupabase();
+            renderAll();
+            if (ok) window.showToast('Kontak berhasil disimpan ke database!');
         };
 
-        window.saveFooterSettings = function(e) {
+        // 8. Simpan Footer & Logo Website ke site_profile
+        window.saveFooterSettings = async function(e) {
             e.preventDefault();
             appState.profile.logo_url = document.getElementById('admin-logo-url').value.trim();
             appState.profile.footer_name = document.getElementById('admin-footer-name').value.trim();
             appState.profile.footer_year = document.getElementById('admin-footer-year').value.trim();
             appState.profile.footer_tagline = document.getElementById('admin-footer-tagline').value.trim();
-            renderAll(); window.showToast('Footer disimpan!');
+
+            const ok = await syncProfileToSupabase();
+            renderAll();
+            if (ok) window.showToast('Logo & Footer berhasil disimpan ke database!');
         };
 
         window.addEventListener('DOMContentLoaded', () => {
             autoSetupDatabase();
             window.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') { window.closeLightbox(); window.closeLoginModal(); window.closeAdminMobileDropdown(); }
+                if (e.key === 'Escape') {
+                    window.closeLightbox();
+                    window.closeLoginModal();
+                    window.closeAdminMobileDropdown();
+                }
             });
         });
     </script>
 </body>
 </html>
-```
