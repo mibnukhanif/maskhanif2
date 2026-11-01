@@ -191,7 +191,7 @@
                     <h3 class="text-xl font-extrabold font-display text-slate-900 dark:text-white">Login Admin Utama</h3>
                 </div>
             </div>
-            
+
             <form id="admin-login-form" onsubmit="window.handleAdminLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5">Username / Email Admin</label>
@@ -629,16 +629,13 @@
                     <div class="min-w-0">
                         <div class="flex items-center gap-2">
                             <h1 class="font-display font-extrabold text-sm sm:text-lg text-slate-900 dark:text-white truncate">Dashboard Admin Panel</h1>
-                            <button onclick="window.openSupabaseConfigModal()" id="db-connection-badge" type="button" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 hover:opacity-80 transition shrink-0 cursor-pointer">Cek Koneksi DB</button>
+                            <span id="db-connection-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shrink-0">Terhubung ke Supabase</span>
                         </div>
                         <p id="admin-active-tab-label" class="text-[11px] sm:text-xs font-semibold text-amber-600 dark:text-amber-400 truncate">Menu Aktif: 1. Kelola Menu Navbar</p>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-2 shrink-0">
-                    <button onclick="window.openSupabaseConfigModal()" class="px-3 py-2.5 rounded-xl text-xs font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500 hover:text-white transition flex items-center gap-1.5">
-                        <i data-lucide="database" class="w-3.5 h-3.5"></i><span class="hidden md:inline">Koneksi Supabase</span>
-                    </button>
                     <button onclick="window.toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-400 hover:bg-slate-200 flex items-center justify-center transition">
                         <i id="theme-icon-admin" data-lucide="moon" class="w-4 h-4"></i>
                     </button>
@@ -1019,95 +1016,20 @@
         </main>
     </div>
 
-    <!-- MODAL PENGATURAN KONEKSI SUPABASE (BISA INPUT LANGSUNG TANPA EDIT KODE) -->
-    <div id="supabase-config-modal" class="fixed inset-0 z-[92] hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-        <div class="relative max-w-lg w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl animate-fade-up">
-            <button onclick="window.closeSupabaseConfigModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white flex items-center justify-center transition">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-            <div class="flex items-center gap-3 mb-4">
-                <div class="w-11 h-11 rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                    <i data-lucide="database" class="w-6 h-6"></i>
-                </div>
-                <div>
-                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-500 block">Cloud Database Sync</span>
-                    <h3 class="font-display font-extrabold text-lg text-slate-900 dark:text-white">Konfigurasi Koneksi Supabase</h3>
-                </div>
-            </div>
-
-            <div id="sb-modal-status-box" class="mb-4 p-3.5 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300">
-                Status: Memeriksa koneksi...
-            </div>
-
-            <form onsubmit="window.saveSupabaseCredentialsUI(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Supabase Project URL</label>
-                    <input type="url" id="sb-input-url" required placeholder="https://xxxxxxxxxxxx.supabase.co" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Publishable Key / Anon Key</label>
-                    <input type="text" id="sb-input-key" required placeholder="sb_publishable_... atau eyJhbGci..." class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono">
-                </div>
-                <div class="flex flex-wrap items-center gap-2 pt-2">
-                    <button type="submit" class="flex-1 py-3 px-4 rounded-xl font-bold text-xs bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/25 transition flex items-center justify-center gap-2">
-                        <i data-lucide="plug-zap" class="w-4 h-4"></i>
-                        <span>Hubungkan & Tarik Data Database</span>
-                    </button>
-                    <button type="button" onclick="window.forcePushAllToSupabase()" class="py-3 px-4 rounded-xl font-bold text-xs bg-amber-400 hover:bg-amber-300 text-slate-950 transition flex items-center justify-center gap-1.5">
-                        <i data-lucide="cloud-upload" class="w-4 h-4"></i>
-                        <span>Paksa Upload Data Ini ke DB</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <!-- JAVASCRIPT MODULE -->
     <script type="module">
         // ============================================================================
-        // KONFIGURASI APLIKASI & SUPABASE (AUTO-DETECT AKTIF OTOMATIS)
-        // Cukup isi SUPABASE_URL & SUPABASE_ANON_KEY di bawah ini ATAU klik tombol
-        // "Koneksi Supabase" di dalam Admin Panel.
+        // KONFIGURASI APLIKASI & SUPABASE (TERTANAM LANGSUNG)
         // ============================================================================
-        const IS_PREVIEW = false; 
+        const IS_PREVIEW = false;
         const SUPABASE_URL = "https://ihuhklhcalsfawajxpww.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_YYO5uC4BMHWRtOi53Xn4vg_2GgxwUFD";
 
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-        let supabase = null;
-
-        function getActiveCredentials() {
-            const savedUrl = localStorage.getItem('https://ihuhklhcalsfawajxpww.supabase.co') || '';
-            const savedKey = localStorage.getItem('sb_publishable_YYO5uC4BMHWRtOi53Xn4vg_2GgxwUFD') || '';
-            const codeUrl = (SUPABASE_URL && SUPABASE_URL !== "https://ihuhklhcalsfawajxpww.supabase.co") ? SUPABASE_URL.trim() : '';
-            const codeKey = (SUPABASE_ANON_KEY && SUPABASE_ANON_KEY !== "sb_publishable_YYO5uC4BMHWRtOi53Xn4vg_2GgxwUFD") ? SUPABASE_ANON_KEY.trim() : '';
-
-            return {
-                url: codeUrl || savedUrl,
-                key: codeKey || savedKey
-            };
-        }
-
-        function initSupabaseClient() {
-            const { url, key } = getActiveCredentials();
-            if (url && url.startsWith('http') && key && key.length > 10) {
-                try {
-                    supabase = createClient(url, key, {
-                        auth: { persistSession: false }
-                    });
-                    return true;
-                } catch (err) {
-                    console.error("Gagal inisialisasi Supabase:", err);
-                    supabase = null;
-                    return false;
-                }
-            }
-            supabase = null;
-            return false;
-        }
-
-        initSupabaseClient();
+        const supabase = (!IS_PREVIEW && SUPABASE_URL && SUPABASE_ANON_KEY)
+            ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: false } })
+            : null;
 
         const INITIAL_DATA = {
             profile: {
@@ -1181,36 +1103,27 @@
         // ============================================================================
         function updateConnectionBadge(statusText, isConnected, isError = false) {
             const badge = document.getElementById('db-connection-badge');
-            const statusBox = document.getElementById('sb-modal-status-box');
             if (badge) {
                 badge.textContent = statusText;
                 if (isError) {
-                    badge.className = "px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-red-500/15 text-red-600 dark:text-red-400 shrink-0 cursor-pointer";
+                    badge.className = "px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-red-500/15 text-red-600 dark:text-red-400 shrink-0";
                 } else if (isConnected) {
-                    badge.className = "px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shrink-0 cursor-pointer";
+                    badge.className = "px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shrink-0";
                 } else {
-                    badge.className = "px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 shrink-0 cursor-pointer";
+                    badge.className = "px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 shrink-0";
                 }
-            }
-            if (statusBox) {
-                statusBox.innerHTML = isConnected
-                    ? `<span class="text-emerald-600 dark:text-emerald-400 font-bold">✅ Terhubung ke Supabase Cloud!</span> Seluruh perubahan dan foto tersimpan langsung ke tabel database.`
-                    : (isError
-                        ? `<span class="text-red-600 dark:text-red-400 font-bold">❌ Error Database:</span> ${statusText}. Pastikan Anda sudah menjalankan ulang script <b>supabase_setup.sql</b> di SQL Editor Supabase.`
-                        : `<span class="text-amber-600 dark:text-amber-400 font-bold">⚠️ Mode Demo Lokal:</span> Masukkan Project URL dan Publishable/Anon Key di bawah ini untuk menghubungkan ke Supabase.`);
             }
         }
 
         async function autoSetupDatabase() {
-            initSupabaseClient();
             if (!supabase) {
-                updateConnectionBadge("Mode Demo (Klik utk Hubungkan DB)", false);
+                updateConnectionBadge("Mode Offline", false);
                 renderAll();
                 return;
             }
 
             try {
-                updateConnectionBadge("Menghubungkan ke Supabase...", false);
+                updateConnectionBadge("Menyinkronkan Database...", false);
 
                 // 1. Cek & Sinkronisasi site_profile
                 const { data: profData, error: profErr } = await supabase
@@ -1311,91 +1224,11 @@
                 renderAll();
             } catch (e) {
                 console.error("Supabase Connection / Query Error:", e);
-                updateConnectionBadge(e.message || "Gagal Koneksi DB", false, true);
-                window.showToast("Error Supabase: " + (e.message || "Periksa SQL & Key"), "error");
+                updateConnectionBadge("Error DB: " + (e.message || "Cek SQL"), false, true);
+                window.showToast("Error Supabase: " + (e.message || "Pastikan supabase_setup.sql sudah dijalankan"), "error");
                 renderAll();
             }
         }
-
-        // Modal Pengaturan Koneksi Supabase di UI
-        window.openSupabaseConfigModal = function() {
-            const { url, key } = getActiveCredentials();
-            setVal('sb-input-url', url);
-            setVal('sb-input-key', key);
-            const modal = document.getElementById('supabase-config-modal');
-            if (modal) {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            }
-            if (window.lucide) window.lucide.createIcons();
-        };
-
-        window.closeSupabaseConfigModal = function() {
-            const modal = document.getElementById('supabase-config-modal');
-            if (modal) {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }
-        };
-
-        window.saveSupabaseCredentialsUI = async function(e) {
-            e.preventDefault();
-            const url = document.getElementById('sb-input-url').value.trim();
-            const key = document.getElementById('sb-input-key').value.trim();
-            localStorage.setItem('IBNU_SB_URL', url);
-            localStorage.setItem('IBNU_SB_KEY', key);
-            window.showToast('Menghubungkan ke proyek Supabase Anda...');
-            await autoSetupDatabase();
-            if (supabase) {
-                window.closeSupabaseConfigModal();
-                window.showToast('Berhasil terhubung ke database Supabase!');
-            }
-        };
-
-        window.forcePushAllToSupabase = async function() {
-            const url = document.getElementById('sb-input-url').value.trim();
-            const key = document.getElementById('sb-input-key').value.trim();
-            if (url && key) {
-                localStorage.setItem('IBNU_SB_URL', url);
-                localStorage.setItem('IBNU_SB_KEY', key);
-                initSupabaseClient();
-            }
-            if (!supabase) {
-                window.showToast('Masukkan URL dan Publishable Key terlebih dahulu!', 'error');
-                return;
-            }
-            try {
-                const okProf = await syncProfileToSupabase();
-                if (!okProf) return;
-
-                for (const m of appState.menus) {
-                    await supabase.from('nav_menus').upsert({
-                        id: String(m.id), label: m.label, target_url: m.target_url, sort_order: Number(m.sort_order) || 1
-                    }, { onConflict: 'id' });
-                }
-                for (const p of appState.portfolios) {
-                    await supabase.from('portfolios').upsert({
-                        id: String(p.id), title: p.title, category: p.category, image_url: p.image_url, description: p.description || ''
-                    }, { onConflict: 'id' });
-                }
-                for (const c of appState.certificates) {
-                    await supabase.from('certificates').upsert({
-                        id: String(c.id), title: c.title, issuer: c.issuer, image_url: c.image_url
-                    }, { onConflict: 'id' });
-                }
-                for (const pr of appState.otherProjects) {
-                    await supabase.from('other_projects').upsert({
-                        id: String(pr.id), title: pr.title, category: pr.category, thumbnail_url: pr.thumbnail_url, short_description: pr.short_description, project_link: pr.project_link || '#contact'
-                    }, { onConflict: 'id' });
-                }
-
-                updateConnectionBadge("Terhubung ke Supabase ✅", true);
-                window.closeSupabaseConfigModal();
-                window.showToast('Seluruh data & foto berhasil di-upload ke Supabase!');
-            } catch (err) {
-                window.showToast('Gagal upload ke database: ' + err.message, 'error');
-            }
-        };
 
         // Fungsi Helper Menyimpan site_profile (Foto Hero, Foto Profil, Logo, Statistik, Kontak, Footer) ke Supabase
         async function syncProfileToSupabase() {
@@ -2368,7 +2201,6 @@
                     window.closeLightbox();
                     window.closeLoginModal();
                     window.closeAdminMobileDropdown();
-                    window.closeSupabaseConfigModal();
                 }
             });
         });
