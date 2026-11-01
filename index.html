@@ -389,7 +389,7 @@
                         </div>
                     </div>
 
-                    <!-- Kolom Kanan: Visual Showcase dengan Lingkaran Emas Lembut ala Referensi -->
+                    <!-- Kolom Kanan: Visual Showcase (Menggunakan Gambar Khusus Header / Hero) -->
                     <div class="lg:col-span-5 flex justify-center">
                         <div class="relative w-72 h-72 sm:w-88 sm:h-88 md:w-96 md:h-96 flex items-center justify-center">
                             <!-- Lingkaran Emas Artistik -->
@@ -397,12 +397,12 @@
                             <!-- Ring Dekoratif -->
                             <div class="absolute inset-0 rounded-full border-2 border-dashed border-amber-500/40 dark:border-amber-400/30"></div>
 
-                            <!-- Foto Utama Hero / Preview -->
-                            <div onclick="window.openProfileLightbox()" class="relative z-10 w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-4 border-white dark:border-slate-900 shadow-2xl cursor-pointer group">
-                                <img id="hero-profile-img" src="https://ik.imagekit.io/ibnukhanif/Khanif/WhatsApp%20Image%202025-09-17%20at%2021.57.22.jpeg?updatedAt=1769050687949" alt="Ibnu Khanif" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x600/0F172A/FACC15?text=Ibnu+Khanif'">
+                            <!-- Gambar Header Khusus -->
+                            <div onclick="window.openHeaderLightbox()" class="relative z-10 w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-4 border-white dark:border-slate-900 shadow-2xl cursor-pointer group">
+                                <img id="hero-image-display" src="https://ik.imagekit.io/ibnukhanif/Khanif/WhatsApp%20Image%202025-09-17%20at%2021.57.22.jpeg?updatedAt=1769050687949" alt="Header Visual" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x600/0F172A/FACC15?text=Ibnu+Khanif'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end justify-center pb-5">
                                     <span class="px-3 py-1 rounded-full bg-white/90 text-slate-900 text-xs font-bold flex items-center gap-1">
-                                        <i data-lucide="maximize-2" class="w-3 h-3"></i> Perbesar Foto
+                                        <i data-lucide="maximize-2" class="w-3 h-3"></i> Perbesar Gambar Header
                                     </span>
                                 </div>
                             </div>
@@ -435,13 +435,13 @@
                 <!-- Card Kontainer Utama About Me -->
                 <div class="bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 rounded-[2rem] p-6 sm:p-10 lg:p-12 shadow-xl">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                        <!-- Foto Profil Profesional (Klik untuk Popup Utuh) -->
+                        <!-- Foto Profil Profesional Sendiri (Klik untuk Popup Utuh) -->
                         <div class="lg:col-span-4 flex flex-col items-center">
                             <div onclick="window.openProfileLightbox()" class="relative group cursor-pointer w-full max-w-[300px] rounded-3xl overflow-hidden border-4 border-amber-400/80 shadow-xl bg-slate-100 dark:bg-slate-800">
                                 <img id="about-photo" src="https://ik.imagekit.io/ibnukhanif/Khanif/WhatsApp%20Image%202025-09-17%20at%2021.57.22.jpeg?updatedAt=1769050687949" alt="Foto Profil Ibnu Khanif" class="w-full h-80 sm:h-96 object-cover object-top group-hover:scale-105 transition duration-500">
                                 <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                                     <span class="px-4 py-2 rounded-full bg-white text-slate-900 text-xs font-bold flex items-center gap-1.5 shadow-lg">
-                                        <i data-lucide="zoom-in" class="w-4 h-4"></i> Lihat Foto Utuh
+                                        <i data-lucide="zoom-in" class="w-4 h-4"></i> Lihat Foto Profil Utuh
                                     </span>
                                 </div>
                             </div>
@@ -1038,15 +1038,32 @@
             </section>
 
             <!-- ==========================================
-                 TAB 2: KELOLA HEADER (HERO SECTION)
+                 TAB 2: KELOLA HEADER (HERO SECTION) + UPLOAD GAMBAR HEADER SENDIRI
             =========================================== -->
             <section id="admin-tab-header" class="admin-section hidden">
                 <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm max-w-4xl">
                     <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white mb-6 flex items-center gap-2">
                         <i data-lucide="sparkles" class="w-5 h-5 text-amber-500"></i>
-                        <span>Pengaturan Header (Hero Section)</span>
+                        <span>Pengaturan Header (Hero Section) & Gambar Visual Utama</span>
                     </h3>
-                    <form onsubmit="window.saveHeaderSettings(event)" class="space-y-4">
+                    <form onsubmit="window.saveHeaderSettings(event)" class="space-y-5">
+                        <!-- Upload / URL Gambar Visual Khusus Header -->
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700">
+                            <img id="admin-header-image-preview" src="https://ik.imagekit.io/ibnukhanif/Khanif/WhatsApp%20Image%202025-09-17%20at%2021.57.22.jpeg?updatedAt=1769050687949" alt="Preview Header" class="w-24 h-24 rounded-2xl object-cover border-2 border-amber-400 shrink-0">
+                            <div class="flex-1 space-y-2 w-full">
+                                <label class="block text-xs font-bold uppercase text-slate-500">URL Gambar Header atau Upload File Sendiri</label>
+                                <input type="text" id="admin-hero-image-url" required class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs">
+                                <div class="flex flex-wrap items-center gap-2 pt-1">
+                                    <label class="cursor-pointer px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-400 text-slate-950 hover:bg-amber-300 transition inline-flex items-center gap-1.5">
+                                        <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+                                        <span>Upload Gambar Header dari Perangkat</span>
+                                        <input type="file" accept="image/*" class="hidden" onchange="window.handleImageUpload(event, 'admin-hero-image-url', 'admin-header-image-preview')">
+                                    </label>
+                                    <span class="text-[11px] text-slate-400">Atur visual grafis khusus untuk seksi atas (Hero).</span>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="sm:col-span-2">
                                 <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Badge Kecil di Atas Headline</label>
@@ -1080,7 +1097,7 @@
                         <div class="pt-3">
                             <button type="submit" class="px-6 py-3 rounded-xl font-bold text-xs bg-slate-900 dark:bg-amber-400 text-white dark:text-slate-950 hover:opacity-90 transition flex items-center gap-2">
                                 <i data-lucide="save" class="w-4 h-4"></i>
-                                <span>Simpan Perubahan Header</span>
+                                <span>Simpan Perubahan Header & Gambar</span>
                             </button>
                         </div>
                     </form>
@@ -1088,25 +1105,25 @@
             </section>
 
             <!-- ==========================================
-                 TAB 3: KELOLA ABOUT ME, STATISTIK & TAG BIDANG PROFESIONAL
+                 TAB 3: KELOLA ABOUT ME (FOTO PROFIL SENDIRI), STATISTIK & TAG
             =========================================== -->
             <section id="admin-tab-about" class="admin-section hidden">
                 <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm max-w-4xl">
                     <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white mb-6 flex items-center gap-2">
                         <i data-lucide="user-check" class="w-5 h-5 text-amber-500"></i>
-                        <span>Kelola Foto Profil (Otomatis Favicon), Statistik & Tag Profesional</span>
+                        <span>Kelola Foto Profil Tentang Saya (Otomatis Favicon), Statistik & Tag</span>
                     </h3>
                     <form onsubmit="window.saveAboutSettings(event)" class="space-y-5">
-                        <!-- Preview & Upload Foto Profil -->
+                        <!-- Preview & Upload Foto Profil Tentang Saya Sendiri -->
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700">
                             <img id="admin-about-preview" src="https://ik.imagekit.io/ibnukhanif/Khanif/WhatsApp%20Image%202025-09-17%20at%2021.57.22.jpeg?updatedAt=1769050687949" alt="Preview Profil" class="w-24 h-24 rounded-2xl object-cover border-2 border-amber-400 shrink-0">
                             <div class="flex-1 space-y-2 w-full">
-                                <label class="block text-xs font-bold uppercase text-slate-500">URL Foto Profil atau Upload File (Otomatis Menjadi Favicon)</label>
+                                <label class="block text-xs font-bold uppercase text-slate-500">URL Foto Profil Tentang Saya atau Upload File Sendiri</label>
                                 <input type="text" id="admin-about-photo-url" required class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs">
                                 <div class="flex flex-wrap items-center gap-2 pt-1">
                                     <label class="cursor-pointer px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-400 text-slate-950 hover:bg-amber-300 transition inline-flex items-center gap-1.5">
                                         <i data-lucide="upload" class="w-3.5 h-3.5"></i>
-                                        <span>Upload Foto dari Perangkat</span>
+                                        <span>Upload Foto Profil dari Perangkat</span>
                                         <input type="file" accept="image/*" class="hidden" onchange="window.handleImageUpload(event, 'admin-about-photo-url', 'admin-about-preview')">
                                     </label>
                                     <span class="text-[11px] text-slate-400">Favicon tab browser otomatis tersinkronisasi.</span>
@@ -1470,6 +1487,7 @@
             profile: {
                 id: 1,
                 logo_url: "https://ik.imagekit.io/ibnukhanif/Khanif/mik.jpg?updatedAt=1769050687836",
+                hero_image_url: "https://ik.imagekit.io/ibnukhanif/Khanif/WhatsApp%20Image%202025-09-17%20at%2021.57.22.jpeg?updatedAt=1769050687949",
                 hero_badge: "Available for Creative Projects",
                 hero_title: "Ibnu Khanif – Creative Designer & Digital Creator",
                 hero_subtitle: "Spesialis dalam menghadirkan karya visual berkelas melalui Desain Logo, Editing Video sinematik, dan Undangan Pernikahan Digital yang estetis serta fungsional.",
@@ -1650,7 +1668,6 @@
             }
 
             try {
-                // 1. Cek apakah site_profile masih kosong
                 const { data: profData, error: profErr } = await supabase
                     .from('site_profile')
                     .select('*')
@@ -1663,7 +1680,6 @@
                     appState.profile = { ...appState.profile, ...profData };
                 }
 
-                // 2. Cek nav_menus
                 const { data: menuData } = await supabase
                     .from('nav_menus')
                     .select('*')
@@ -1675,7 +1691,6 @@
                     appState.menus = menuData;
                 }
 
-                // 3. Cek portfolios
                 const { data: portData } = await supabase.from('portfolios').select('*');
                 if (portData && portData.length === 0) {
                     await supabase.from('portfolios').insert(appState.portfolios);
@@ -1683,7 +1698,6 @@
                     appState.portfolios = portData;
                 }
 
-                // 4. Cek certificates
                 const { data: certData } = await supabase.from('certificates').select('*');
                 if (certData && certData.length === 0) {
                     await supabase.from('certificates').insert(appState.certificates);
@@ -1691,7 +1705,6 @@
                     appState.certificates = certData;
                 }
 
-                // 5. Cek other_projects
                 const { data: projData } = await supabase.from('other_projects').select('*');
                 if (projData && projData.length === 0) {
                     await supabase.from('other_projects').insert(appState.otherProjects);
@@ -1723,7 +1736,7 @@
         function renderAll() {
             const p = appState.profile;
 
-            // 1. Sinkronisasi Favicon dengan Foto Profil
+            // 1. Sinkronisasi Favicon dengan Foto Profil Tentang Saya
             syncDynamicFavicon(p.about_photo_url);
 
             // 2. Render Logo di semua lokasi
@@ -1732,7 +1745,7 @@
                 if (el) el.src = p.logo_url;
             });
 
-            // 3. Render Menu Navbar (Desktop, Mobile Dropdown, dan Footer Quick Links)
+            // 3. Render Menu Navbar
             const sortedMenus = [...appState.menus].sort((a, b) => Number(a.sort_order) - Number(b.sort_order));
 
             const desktopNav = document.getElementById('desktop-nav-menus');
@@ -1764,7 +1777,7 @@
                 `).join('');
             }
 
-            // 4. Render Hero Section
+            // 4. Render Hero Section (Menggunakan hero_image_url khusus header)
             setText('hero-badge-text', p.hero_badge);
             const heroHeadlineEl = document.getElementById('hero-headline');
             if (heroHeadlineEl) {
@@ -1780,9 +1793,9 @@
             setAttr('hero-cta1', 'href', p.hero_cta1_link);
             setText('hero-cta2-label', p.hero_cta2_text);
             setAttr('hero-cta2', 'href', p.hero_cta2_link);
-            setAttr('hero-profile-img', 'src', p.about_photo_url);
+            setAttr('hero-image-display', 'src', p.hero_image_url || p.about_photo_url);
 
-            // 5. Render About Me, Statistik, dan Tag Bidang Profesional
+            // 5. Render About Me (Menggunakan about_photo_url khusus tentang saya), Statistik & Tag
             setAttr('about-photo', 'src', p.about_photo_url);
             setText('about-title', p.about_title);
             setText('about-description', p.about_description);
@@ -1809,16 +1822,16 @@
                 }).join('');
             }
 
-            // 6. Render Portfolio Filters & Grid
+            // 6. Render Portfolio
             renderPortfolioSection();
 
-            // 7. Render Sertifikat & Penghargaan
+            // 7. Render Sertifikat
             renderCertificatesSection();
 
             // 8. Render Projek Lainnya
             renderOtherProjectsSection();
 
-            // 9. Render Contact Person
+            // 9. Render Kontak
             setText('contact-heading', p.contact_title);
             setText('contact-wa-text', p.contact_whatsapp);
             setAttr('contact-wa-card', 'href', p.contact_whatsapp_link);
@@ -1834,10 +1847,9 @@
             setText('footer-copyright-year', p.footer_year);
             setText('footer-tagline', p.footer_tagline);
 
-            // 11. Render Data di dalam Form & Daftar Admin Panel
+            // 11. Render Admin Form Fields
             renderAdminFormsAndLists();
 
-            // Refresh Lucide Icons
             if (window.lucide) {
                 window.lucide.createIcons();
             }
@@ -1853,7 +1865,7 @@
         }
 
         // ===================================================================
-        // RENDER PORTFOLIO SECTION (DENGAN EFEK HOVER & POPUP UNCUT)
+        // RENDER PORTFOLIO SECTION
         // ===================================================================
         function renderPortfolioSection() {
             const categories = ["Semua", ...new Set(appState.portfolios.map(item => item.category))];
@@ -1889,7 +1901,6 @@
                 <div onclick="window.openItemLightbox('portfolio', '${item.id}')" class="group relative rounded-3xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col">
                     <div class="relative h-64 sm:h-72 overflow-hidden bg-slate-100 dark:bg-slate-800">
                         <img src="${item.image_url}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/0F172A/FACC15?text=Portfolio+Karya'">
-                        <!-- Hover Overlay (Judul Karya Muncul Saat Hover) -->
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                             <span class="inline-block w-fit px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-amber-400 text-slate-950 mb-2">
                                 ${item.category}
@@ -1916,7 +1927,7 @@
         }
 
         // ===================================================================
-        // RENDER SERTIFIKAT & PENGHARGAAN
+        // RENDER SERTIFIKAT
         // ===================================================================
         function renderCertificatesSection() {
             const grid = document.getElementById('certificates-grid');
@@ -1956,14 +1967,13 @@
         }
 
         // ===================================================================
-        // RENDER PROJEK LAINNYA (3 KATEGORI KARTU)
+        // RENDER PROJEK LAINNYA
         // ===================================================================
         function renderOtherProjectsSection() {
             const filtered = appState.activeProjectFilter === "Semua"
                 ? appState.otherProjects
                 : appState.otherProjects.filter(p => p.category === appState.activeProjectFilter);
 
-            // Update tombol filter aktif
             document.querySelectorAll('.proj-filter-btn').forEach(btn => {
                 const cat = btn.getAttribute('data-proj-filter');
                 if (cat === appState.activeProjectFilter) {
@@ -2010,18 +2020,17 @@
         }
 
         // ===================================================================
-        // RENDER FORM & DAFTAR ITEM DI ADMIN PANEL (TERMASUK TOMBOL DUPLIKAT)
+        // RENDER ADMIN FORMS & LISTS
         // ===================================================================
         function renderAdminFormsAndLists() {
             const p = appState.profile;
 
-            // Update Counter Ringkasan Admin
             setText('admin-count-menus', appState.menus.length);
             setText('admin-count-portfolio', appState.portfolios.length);
             setText('admin-count-cert', appState.certificates.length);
             setText('admin-count-projects', appState.otherProjects.length);
 
-            // 1. Daftar Menu di Admin
+            // 1. Menu List
             const menuList = document.getElementById('admin-menu-list');
             if (menuList) {
                 const sorted = [...appState.menus].sort((a, b) => Number(a.sort_order) - Number(b.sort_order));
@@ -2051,7 +2060,9 @@
                 `).join('');
             }
 
-            // 2. Isi Form Header
+            // 2. Header Form Fields (Termasuk Gambar Header Sendiri)
+            setAttr('admin-header-image-preview', 'src', p.hero_image_url || p.about_photo_url);
+            setVal('admin-hero-image-url', p.hero_image_url || p.about_photo_url);
             setVal('admin-hero-badge', p.hero_badge);
             setVal('admin-hero-title', p.hero_title);
             setVal('admin-hero-subtitle', p.hero_subtitle);
@@ -2060,7 +2071,7 @@
             setVal('admin-hero-cta2-text', p.hero_cta2_text);
             setVal('admin-hero-cta2-link', p.hero_cta2_link);
 
-            // 3. Isi Form About, Statistik & Tag
+            // 3. About Me Form Fields (Foto Profil Tentang Saya Sendiri)
             setAttr('admin-about-preview', 'src', p.about_photo_url);
             setVal('admin-about-photo-url', p.about_photo_url);
             setVal('admin-about-title', p.about_title);
@@ -2070,7 +2081,7 @@
             setVal('admin-stat-clients', p.happy_clients);
             setVal('admin-about-tags', Array.isArray(p.professional_tags) ? p.professional_tags.join(', ') : '');
 
-            // 4. Daftar Portfolio di Admin (Edit, Duplikat, Hapus)
+            // 4. Portfolio List
             const portList = document.getElementById('admin-portfolio-list');
             if (portList) {
                 portList.innerHTML = appState.portfolios.map(item => `
@@ -2100,7 +2111,7 @@
                 `).join('');
             }
 
-            // 5. Daftar Sertifikat di Admin (Edit, Duplikat, Hapus)
+            // 5. Certificate List
             const certList = document.getElementById('admin-cert-list');
             if (certList) {
                 certList.innerHTML = appState.certificates.map(cert => `
@@ -2129,7 +2140,7 @@
                 `).join('');
             }
 
-            // 6. Daftar Projek Lainnya di Admin (Edit, Duplikat, Hapus)
+            // 6. Project List
             const projList = document.getElementById('admin-project-list');
             if (projList) {
                 projList.innerHTML = appState.otherProjects.map(proj => `
@@ -2159,7 +2170,7 @@
                 `).join('');
             }
 
-            // 7. Isi Form Kontak
+            // 7. Contact
             setVal('admin-contact-title', p.contact_title);
             setVal('admin-contact-wa', p.contact_whatsapp);
             setVal('admin-contact-wa-link', p.contact_whatsapp_link);
@@ -2168,7 +2179,7 @@
             setVal('admin-contact-ig-link', p.contact_instagram_link);
             setVal('admin-contact-cta', p.contact_cta_text);
 
-            // 8. Isi Form Footer & Logo
+            // 8. Footer
             setVal('admin-logo-url', p.logo_url);
             setVal('admin-footer-name', p.footer_name);
             setVal('admin-footer-year', p.footer_year);
@@ -2181,7 +2192,7 @@
         }
 
         // ===================================================================
-        // INTERAKSI UI: TOAST, MODAL KONFIRMASI, LIGHTBOX POPUP, TEMA
+        // INTERAKSI UI & LIGHTBOX
         // ===================================================================
         window.showToast = function(message, type = 'success') {
             const container = document.getElementById('toast-container');
@@ -2226,7 +2237,6 @@
             cancelBtn.onclick = cleanUp;
         };
 
-        // Lightbox Popup (Ukuran Gambar Utuh & Tidak Terpotong)
         window.openItemLightbox = function(type, id) {
             let title = "";
             let badge = "";
@@ -2280,10 +2290,23 @@
             modal.classList.add('flex');
         };
 
+        window.openHeaderLightbox = function() {
+            const p = appState.profile;
+            setText('lightbox-title', p.hero_title);
+            setText('lightbox-badge', 'Header / Hero Visual');
+            setAttr('lightbox-image', 'src', p.hero_image_url || p.about_photo_url);
+            setText('lightbox-desc', p.hero_subtitle);
+            const extLink = document.getElementById('lightbox-external-link');
+            if (extLink) extLink.classList.add('hidden');
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        };
+
         window.openProfileLightbox = function() {
             const p = appState.profile;
             setText('lightbox-title', 'Ibnu Khanif – Creative Designer & Digital Creator');
-            setText('lightbox-badge', 'Foto Profil Resmi');
+            setText('lightbox-badge', 'Foto Profil Tentang Saya');
             setAttr('lightbox-image', 'src', p.about_photo_url);
             setText('lightbox-desc', p.about_description);
             const extLink = document.getElementById('lightbox-external-link');
@@ -2299,7 +2322,6 @@
             modal.classList.remove('flex');
         };
 
-        // Dark & Light Mode Toggle
         window.toggleTheme = function() {
             appState.darkMode = !appState.darkMode;
             const root = document.documentElement;
@@ -2316,7 +2338,6 @@
             if (window.lucide) window.lucide.createIcons();
         };
 
-        // Mobile Dropdown Menu (Halaman Utama)
         window.toggleMobileDropdown = function() {
             const menu = document.getElementById('mobile-dropdown-menu');
             const icon = document.getElementById('mobile-menu-icon');
@@ -2339,7 +2360,6 @@
             if (window.lucide) window.lucide.createIcons();
         };
 
-        // Mobile Dropdown Menu (Khusus Admin Panel di Handphone)
         window.toggleAdminMobileDropdown = function() {
             const menu = document.getElementById('admin-mobile-dropdown');
             const icon = document.getElementById('admin-mobile-menu-icon');
@@ -2363,7 +2383,6 @@
             if (window.lucide) window.lucide.createIcons();
         };
 
-        // Filter Portfolio & Projek
         window.filterPortfolio = function(category) {
             appState.activePortfolioFilter = category;
             renderPortfolioSection();
@@ -2377,7 +2396,7 @@
         };
 
         // ===================================================================
-        // SISTEM LOGIN 1 USER ADMIN UTAMA & NAVIGASI ADMIN PANEL
+        // ADMIN LOGIN & NAVIGASI
         // ===================================================================
         window.openAdminAccess = function() {
             if (appState.isAdminLoggedIn) {
@@ -2405,7 +2424,6 @@
             const username = document.getElementById('login-username').value.trim();
             const password = document.getElementById('login-password').value.trim();
 
-            // Jika sudah terhubung ke Supabase, dukung Supabase Auth (Email & Password) atau Tabel admin_users
             if (!IS_PREVIEW && supabase) {
                 try {
                     if (username.includes('@')) {
@@ -2417,31 +2435,16 @@
                             appState.isAdminLoggedIn = true;
                             window.closeLoginModal();
                             showAdminDashboard();
-                            window.showToast('Berhasil login sebagai Admin Utama via Supabase Auth!');
+                            window.showToast('Berhasil login sebagai Admin Utama!');
                             return;
                         }
                     }
-                    const { data: adminRow } = await supabase
-                        .from('admin_users')
-                        .select('*')
-                        .eq('username', username)
-                        .eq('password_hash', password)
-                        .maybeSingle();
-
-                    if (adminRow) {
-                        appState.isAdminLoggedIn = true;
-                        window.closeLoginModal();
-                        showAdminDashboard();
-                        window.showToast(`Selamat datang kembali, ${adminRow.full_name}!`);
-                        return;
-                    }
                 } catch (err) {
-                    console.warn("Validasi Supabase fallback ke kredensial Admin Utama:", err);
+                    console.warn(err);
                 }
             }
 
-            // Validasi 1 User Admin Utama
-            const validUser = (username.toLowerCase() === 'admin' || username.toLowerCase() === 'ibnukhanif' || username.toLowerCase() === 'ibnukhanif@admin.com');
+            const validUser = (username.toLowerCase() === 'admin' || username.toLowerCase() === 'ibnukhanif');
             const validPass = (password === 'admin123');
 
             if (validUser && validPass) {
@@ -2512,13 +2515,10 @@
                 }
             });
 
-            // Tutup otomatis dropdown menu di handphone setelah memilih tab
             window.closeAdminMobileDropdown();
-
             if (window.lucide) window.lucide.createIcons();
         };
 
-        // Helper Upload File Gambar dari Perangkat (FileReader Data URL)
         window.handleImageUpload = function(event, targetInputId, previewImgId = null) {
             const file = event.target.files?.[0];
             if (!file) return;
@@ -2537,10 +2537,8 @@
         };
 
         // ===================================================================
-        // OPERASI CRUD & DUPLIKAT DI ADMIN PANEL (SINKRON KE SUPABASE & UI)
+        // CRUD OPERASI ADMIN PANEL
         // ===================================================================
-
-        // --- 1. CRUD MENU NAVBAR ---
         window.saveMenuItem = async function(e) {
             e.preventDefault();
             const editId = document.getElementById('menu-edit-id').value;
@@ -2599,7 +2597,7 @@
         window.deleteMenuItem = function(id) {
             const item = appState.menus.find(m => m.id === id);
             if (!item) return;
-            window.askConfirm('Hapus Item Menu', `Hapus menu "${item.label}" dari navigasi atas?`, async () => {
+            window.askConfirm('Hapus Item Menu', `Hapus menu "${item.label}" dari navigasi?`, async () => {
                 appState.menus = appState.menus.filter(m => m.id !== id);
                 if (!IS_PREVIEW && supabase) {
                     await supabase.from('nav_menus').delete().eq('id', id);
@@ -2617,9 +2615,10 @@
             setText('menu-form-title', 'Tambah / Edit Item Menu');
         };
 
-        // --- 2. CRUD HEADER (HERO) ---
+        // Simpan Header Settings (Termasuk Gambar Header Sendiri)
         window.saveHeaderSettings = async function(e) {
             e.preventDefault();
+            appState.profile.hero_image_url = document.getElementById('admin-hero-image-url').value.trim();
             appState.profile.hero_badge = document.getElementById('admin-hero-badge').value.trim();
             appState.profile.hero_title = document.getElementById('admin-hero-title').value.trim();
             appState.profile.hero_subtitle = document.getElementById('admin-hero-subtitle').value.trim();
@@ -2632,10 +2631,10 @@
                 await supabase.from('site_profile').upsert([appState.profile]);
             }
             renderAll();
-            window.showToast('Pengaturan Header (Hero Section) berhasil disimpan!');
+            window.showToast('Pengaturan Header (Hero Section) & Gambar Visual berhasil disimpan!');
         };
 
-        // --- 3. CRUD ABOUT ME, STATISTIK & TAG BIDANG PROFESIONAL ---
+        // Simpan About Settings (Foto Profil Tentang Saya Sendiri)
         window.saveAboutSettings = async function(e) {
             e.preventDefault();
             const photoUrl = document.getElementById('admin-about-photo-url').value.trim();
@@ -2654,10 +2653,10 @@
                 await supabase.from('site_profile').upsert([appState.profile]);
             }
             renderAll();
-            window.showToast('Profil, Statistik, Tag Profesional & Favicon berhasil diperbarui!');
+            window.showToast('Profil Tentang Saya, Statistik, Tag Profesional & Favicon berhasil diperbarui!');
         };
 
-        // --- 4. CRUD & DUPLIKAT PORTFOLIO ---
+        // Portfolio CRUD & Duplicate
         window.savePortfolioItem = async function(e) {
             e.preventDefault();
             const editId = document.getElementById('portfolio-edit-id').value;
@@ -2718,13 +2717,13 @@
         window.deletePortfolioItem = function(id) {
             const item = appState.portfolios.find(x => x.id === id);
             if (!item) return;
-            window.askConfirm('Hapus Karya Portfolio', `Apakah Anda yakin ingin menghapus "${item.title}"?`, async () => {
+            window.askConfirm('Hapus Karya Portfolio', `Hapus karya "${item.title}"?`, async () => {
                 appState.portfolios = appState.portfolios.filter(x => x.id !== id);
                 if (!IS_PREVIEW && supabase) {
                     await supabase.from('portfolios').delete().eq('id', id);
                 }
                 renderAll();
-                window.showToast(`Portfolio "${item.title}" berhasil dihapus.`);
+                window.showToast(`Portfolio "${item.title}" telah dihapus.`);
             });
         };
 
@@ -2737,7 +2736,7 @@
             setText('portfolio-form-heading', 'Upload / Edit Karya Portfolio');
         };
 
-        // --- 5. CRUD & DUPLIKAT SERTIFIKAT ---
+        // Sertifikat CRUD & Duplicate
         window.saveCertificateItem = async function(e) {
             e.preventDefault();
             const editId = document.getElementById('cert-edit-id').value;
@@ -2814,7 +2813,7 @@
             setText('cert-form-heading', 'Upload / Edit Sertifikat');
         };
 
-        // --- 6. CRUD & DUPLIKAT PROJEK LAINNYA ---
+        // Projek Lainnya CRUD & Duplicate
         window.saveProjectItem = async function(e) {
             e.preventDefault();
             const editId = document.getElementById('project-edit-id').value;
@@ -2877,7 +2876,7 @@
         window.deleteProjectItem = function(id) {
             const proj = appState.otherProjects.find(p => p.id === id);
             if (!proj) return;
-            window.askConfirm('Hapus Projek Lainnya', `Hapus projek "${proj.title}" dari daftar?`, async () => {
+            window.askConfirm('Hapus Projek Lainnya', `Hapus projek "${proj.title}"?`, async () => {
                 appState.otherProjects = appState.otherProjects.filter(p => p.id !== id);
                 if (!IS_PREVIEW && supabase) {
                     await supabase.from('other_projects').delete().eq('id', id);
@@ -2897,7 +2896,6 @@
             setText('project-form-heading', 'Upload / Edit Projek Lainnya');
         };
 
-        // --- 7. CRUD KONTAK ---
         window.saveContactSettings = async function(e) {
             e.preventDefault();
             appState.profile.contact_title = document.getElementById('admin-contact-title').value.trim();
@@ -2915,7 +2913,6 @@
             window.showToast('Informasi Kontak berhasil diperbarui!');
         };
 
-        // --- 8. CRUD FOOTER & LOGO ---
         window.saveFooterSettings = async function(e) {
             e.preventDefault();
             appState.profile.logo_url = document.getElementById('admin-logo-url').value.trim();
@@ -2930,41 +2927,26 @@
             window.showToast('Pengaturan Footer & Logo Website berhasil disimpan!');
         };
 
-        // ===================================================================
-        // REGISTRASI SERVICE WORKER DINAMIS VIA BLOB (1-FILE PWA)
-        // ===================================================================
+        // Service Worker Dinamis
         function registerDynamicServiceWorker() {
             if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
                 try {
                     const swCode = `
-                        const CACHE_NAME = 'ibnu-khanif-portfolio-v1';
-                        self.addEventListener('install', (event) => {
-                            self.skipWaiting();
-                        });
-                        self.addEventListener('activate', (event) => {
-                            event.waitUntil(clients.claim());
-                        });
-                        self.addEventListener('fetch', (event) => {
-                            event.respondWith(
-                                fetch(event.request).catch(() => caches.match(event.request))
-                            );
-                        });
+                        self.addEventListener('install', (e) => self.skipWaiting());
+                        self.addEventListener('activate', (e) => clients.claim());
+                        self.addEventListener('fetch', (e) => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
                     `;
                     const blob = new Blob([swCode], { type: 'application/javascript' });
                     const swUrl = URL.createObjectURL(blob);
                     navigator.serviceWorker.register(swUrl).catch(() => {});
-                } catch (e) {
-                    // Abaikan pada environment iframe sandbox
-                }
+                } catch (e) {}
             }
         }
 
-        // Jalankan Aplikasi saat DOM selesai dimuat
         window.addEventListener('DOMContentLoaded', () => {
             autoSetupDatabase();
             registerDynamicServiceWorker();
 
-            // Tutup modal dengan tombol Escape
             window.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     window.closeLightbox();
